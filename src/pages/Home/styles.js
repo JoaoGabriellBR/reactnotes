@@ -1,31 +1,32 @@
-import { Container, Box } from 'rbx';
 import styled from 'styled-components';
 import { green, white } from 'styles/colorProvider';
 
-export const StyledContainer = styled(Container)`
-    background: transparent;
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: flex-start;
+export const Container = styled.section`
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
 `;
 
-export const StyledBox = styled(Box)`
-    background: transparent;
-    min-height: 150px;
-    padding-top: 11em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    align-items: center;
+export const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 100px;
 
-    @media (max-width: 1000px) {
-        text-align: center;
-    }
-`
+  @media (max-width: 1000px) {
+    width: 85%;
+    margin: 0;
+  }
+`;
 
 export const LinkButton = styled.p`
-
     color: ${white};
     text-decoration: underline;
     cursor: pointer;

@@ -9,8 +9,13 @@ export const GlobalStyle = createGlobalStyle`
         }
 
         body {
+            overflow-x: hidden;
             background-color: ${darkBlue};
-            color: ${white};
+            color: #000;
             font-family: 'Roboto', 'Poppins';
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            box-sizing: border-box;
         }
 `;

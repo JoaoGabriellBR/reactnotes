@@ -7,4 +7,8 @@ export const StyledSubtitle = styled.h2`
     margin-top: ${(props) => props.marginTop || '5px'};
     margin-bottom: ${(props) => props.marginBottom || '5px'};
     color: ${white};
+
+    @media (max-width: 1000px) {
+        text-align: center;
+    }
 `;

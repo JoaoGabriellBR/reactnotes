@@ -28,6 +28,6 @@ export const StyledButton = styled.button`
     }
 
     @media (max-width: 1000px) {
-        width: ${(props) => props.mobileWidth || '50%'};
+        width: ${(props) => props.mobile || '80%'};
       }
 `;
