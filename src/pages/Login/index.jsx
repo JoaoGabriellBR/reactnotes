@@ -1,18 +1,37 @@
-import React from "react";
-import Header from "components/HeaderHome/index";
+import React, { useState } from "react";
 import { Container, LeftBox, RightBox, Div, Form, LinkButton } from "./styles";
 import Title from "components/Title/index";
 import TextField from "@mui/material/TextField";
-import Input from "components/Input/index";
 import Button from "components/Button/index";
 import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import api from "api/index";
+import Cookies from 'js-cookie';
+import { toast } from "react-toastify";
 
 function Register() {
   const navigate = useNavigate();
 
   const openLink = (link) => {
     navigate(link);
+  };
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await api.post("/login", { email, password });
+      const { token } = response?.data;
+      Cookies.set("reactnotes_authtoken", token);
+      openLink(`/user`);
+    } catch (e) {
+      console.log(e.message);
+      toast.error(e?.response?.data?.error, {
+        position: toast.POSITION.TOP_RIGHT,
+        theme: "colored",
+      });
+    }
   };
 
   return (
@@ -29,16 +48,25 @@ function Register() {
                 Acessar
               </Title>
               <TextField
-                variant="standard"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Digite o seu e-mail"
                 className="input-form"
                 label="E-mail"
               />
               <TextField
-                variant="standard"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Digite a sua senha"
                 className="input-form"
                 label="Senha"
               />
-              <Button height="50px" width="50%">
+              <Button
+                disabled={!email || !password}
+                type="button"
+                onClick={handleLogin}
+                width="50%"
+              >
                 Entrar
               </Button>
 

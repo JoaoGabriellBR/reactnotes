@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyledHeader, DivLogo } from "./styles";
+import { StyledHeader, DivLogo, DivIcon } from "./styles";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";
 import Logo from "../../assets/logo.png";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
+import Cookies from "js-cookie";
 
 function Header() {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -25,6 +26,11 @@ function Header() {
     setAnchorElUser(null);
   };
 
+  const handleLogout = () => {
+    Cookies.remove("reactnotes_authtoken");
+    openLink("/login");
+  };
+
   return (
     <StyledHeader>
       <DivLogo onClick={() => openLink("/")}>
@@ -33,11 +39,16 @@ function Header() {
           React Notes
         </Title>
       </DivLogo>
-      <IconButton onClick={handleOpenUserMenu}>
-        <AccountCircleIcon
-          style={{ color: "#00F39F", width: "50px", height: "50px" }}
-        />
-      </IconButton>
+
+      <DivIcon>
+        <IconButton
+          onClick={handleOpenUserMenu}
+        >
+          <AccountCircleIcon
+            style={{ color: "#00F39F", width: "50px", height: "50px" }}
+          />
+        </IconButton>
+      </DivIcon>
 
       <Menu
         sx={{ mt: "45px" }}
@@ -63,7 +74,7 @@ function Header() {
           <Typography textAlign="center">Minhas notas</Typography>
         </MenuItem>
 
-        <MenuItem>
+        <MenuItem onClick={handleLogout}>
           <Typography textAlign="center">Sair</Typography>
         </MenuItem>
       </Menu>

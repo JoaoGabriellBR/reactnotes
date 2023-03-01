@@ -1,19 +1,52 @@
-import React from "react";
-import Header from "components/HeaderHome/index";
-import { Container, LeftBox, RightBox, Div, Form,LinkButton } from "./styles";
+import React, { useState } from "react";
+import { Container, LeftBox, RightBox, Div, Form, LinkButton } from "./styles";
 import Title from "components/Title/index";
 import TextField from "@mui/material/TextField";
-import Input from "components/Input/index";
 import Button from "components/Button/index";
-import logo from '../../assets/logo.png';
+import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import api from "../../api/index";
+import { toast } from "react-toastify";
 
 function Register() {
-
   const navigate = useNavigate();
+  const openLink = (link) => navigate(link);
+  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const openLink = (link) => {
-    navigate(link);
+  const handleCreateUser = async () => {
+    try {
+      const response = await api({
+        method: "POST",
+        url: "/user",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          name: name,
+          email: email,
+          password: password,
+        },
+        json: true,
+      });
+      setName("");
+      setEmail("");
+      setPassword("");
+      toast.success("Usuário cadastrado com sucesso!", {
+        position: toast.POSITION.TOP_RIGHT,
+        theme: "colored",
+        autoClose: 2000,
+      });
+      navigate("/login");
+    } catch (e) {
+      console.log(e.message);
+      toast.error(e?.response?.data?.error, {
+        position: toast.POSITION.TOP_RIGHT,
+        theme: "colored",
+      });
+    }
   };
 
   return (
@@ -30,21 +63,33 @@ function Register() {
                 Criar conta
               </Title>
               <TextField
-                variant="standard"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Digite o seu nome"
                 className="input-form"
                 label="Nome"
               />
               <TextField
-                variant="standard"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Digite o seu e-mail"
                 className="input-form"
                 label="E-mail"
               />
               <TextField
-                variant="standard"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Digite a sua senha"
                 className="input-form"
                 label="Senha"
               />
-              <Button height="50px" width="50%">
+              <Button
+                type="button"
+                mobile="100%"
+                width="50%"
+                disabled={!name || !email || !password}
+                onClick={handleCreateUser}
+              >
                 Cadastrar
               </Button>
               <div className="entre">
