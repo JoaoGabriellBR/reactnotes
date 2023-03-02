@@ -10,7 +10,7 @@ export const StyledButton = styled.button`
     color: ${black};
     border: none;
     border-radius: 8px;
-    min-width: ${(props) => props.width || '100px'};
+    width: ${(props) => props.width || '100px'};
     min-height: ${(props) => props.height || '40px'};
     margin-right: ${(props) => props.marginRight};
     margin-left: ${(props) => props.marginLeft};

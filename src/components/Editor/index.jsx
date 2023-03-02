@@ -1,14 +1,16 @@
 import React, { useRef } from "react";
 import { Editor as TinyMCE } from "@tinymce/tinymce-react";
+import { debounce } from "lodash";
 
-export default function Editor({ content, setContent }) {
+export default function Editor({ content, setContent, handleCreateNote }) {
   const editorRef = useRef(null);
 
   const handleEditorChange = () => {
     if (editorRef.current) {
-      setContent(editorRef.current.getContent());
+      const newContent = editorRef.current.getContent();
+      setContent(newContent);
     }
-  };
+  }
 
   return (
     <>

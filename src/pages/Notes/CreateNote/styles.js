@@ -15,48 +15,26 @@ export const GridContainer = styled.div`
 export const Container = styled.section`
   grid-area: container;
   background-color: #f2f2f2;
-  padding: 0 5rem 1rem 5rem;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
 
   @media (max-width: 1000px){
     align-items: center;
-    padding: 1.5rem;
+    padding: 1rem 0 1rem 0;
   }
 
-  .div-title {
-    width: 100%;
-    min-height: 10rem;
+  .div-main {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-
-    @media (max-width: 1000px) {
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
+    justify-content: center;
   }
 
   .div-editor {
-    width: 100%;
+     width: ${props => props.width || "100%"};
   }
 
-  .input-title {
-    width: 30%;
-    min-height: 40%;
-    font-size: 15px;
-    font-weight: 500;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid ${darkBlue};
-    outline: none;
-
-    @media (max-width: 1000px){
-        width: 100%;
-        margin-bottom: 15px;
-    }
-  }
 `;

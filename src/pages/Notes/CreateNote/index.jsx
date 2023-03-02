@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "components/Header/index";
 import Button from "components/Button/index";
+import SideMenu from "components/SideMenu/index";
 import { GridContainer, Container } from "./styles";
 import Editor from "components/Editor/index";
 import api from "api/index";
@@ -10,6 +11,7 @@ import Cookies from "js-cookie";
 export default function CreateNote() {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
+  const [open, setOpen] = useState(false);
 
   const handleCreateNote = async () => {
     try {
@@ -42,20 +44,11 @@ export default function CreateNote() {
     <GridContainer>
       <Header />
       <Container>
-        <div className="div-title">
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Digite o título da sua nota"
-            className="input-title"
-            type="text"
-          />
-          <Button disabled={!title} onClick={handleCreateNote}>
-            Publicar
-          </Button>
-        </div>
-        <div className="div-editor">
-          <Editor content={content} setContent={setContent} />
+        <div style={{width: open ? "82.5%" : "100%" }}>
+          <SideMenu open={open} setOpen={setOpen} title={title} setTitle={setTitle}/>
+          <div>
+            <Editor content={content} setContent={setContent} handleCreateNote={handleCreateNote} />
+          </div>
         </div>
       </Container>
     </GridContainer>
