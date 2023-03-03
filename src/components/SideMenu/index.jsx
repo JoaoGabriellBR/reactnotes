@@ -29,7 +29,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function SideMenu({open, setOpen, title, setTitle }) {
+export default function SideMenu({handleCreateNote, open, setOpen, title, setTitle }) {
   const theme = useTheme();
 
   const handleDrawerOpen = () => {
@@ -64,7 +64,7 @@ export default function SideMenu({open, setOpen, title, setTitle }) {
           </IconButton>
           <Input value={title} onChange={(e) => setTitle(e.target.value)} className="input-title" type="text" placeholder="Título" />
         </Typography>
-        <Button>Salvar</Button>
+        <Button onClick={handleCreateNote}>Salvar</Button>
       </Toolbar>
       <Drawer
         sx={{

@@ -15,7 +15,7 @@ export default function Editor({ content, setContent, handleCreateNote }) {
   return (
     <>
       <TinyMCE
-        apiKey="your-api-key"
+        apiKey="p3lvus39oh0e16fpli5qfco4oydcib1tel83iussvtdjytjr"
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue="<p>Conteúdo da sua nota.</p>"
         onEditorChange={handleEditorChange}

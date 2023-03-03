@@ -45,7 +45,7 @@ export default function CreateNote() {
       <Header />
       <Container>
         <div style={{width: open ? "82.5%" : "100%" }}>
-          <SideMenu open={open} setOpen={setOpen} title={title} setTitle={setTitle}/>
+          <SideMenu handleCreateNote={handleCreateNote} open={open} setOpen={setOpen} title={title} setTitle={setTitle}/>
           <div>
             <Editor content={content} setContent={setContent} handleCreateNote={handleCreateNote} />
           </div>

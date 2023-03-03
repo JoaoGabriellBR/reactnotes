@@ -27,7 +27,7 @@ const Rotas = () => {
           exact
           path="/user"
           element={
-            Cookies.get("reactnotes_authtoken") ? (
+            Cookies.set("reactnotes_authtoken") ? (
               <User />
             ) : (
               <Navigate to="/login" />
@@ -56,18 +56,6 @@ const Rotas = () => {
             )
           }
         ></Route>
-
-        {/* <Route
-          exact
-          path="/user/:id"
-          element={() => {
-            return isAuthenticated() ? (
-              <User />
-            ) : (
-              <Navigate to="/login" />
-            );
-          }}
-        ></Route> */}
       </Routes>
     </BrowserRouter>
   );
