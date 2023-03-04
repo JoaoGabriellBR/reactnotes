@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
-import { Editor as TinyMCE } from "@tinymce/tinymce-react";
+import { Editor } from "@tinymce/tinymce-react";
 import { debounce } from "lodash";
 
-export default function Editor({ content, setContent, handleCreateNote }) {
+export default function TinyMCE({ setContent, noteData, setNoteData }) {
   const editorRef = useRef(null);
 
   const handleEditorChange = () => {
@@ -10,11 +10,11 @@ export default function Editor({ content, setContent, handleCreateNote }) {
       const newContent = editorRef.current.getContent();
       setContent(newContent);
     }
-  }
+  };
 
   return (
     <>
-      <TinyMCE
+      <Editor
         apiKey="p3lvus39oh0e16fpli5qfco4oydcib1tel83iussvtdjytjr"
         onInit={(evt, editor) => (editorRef.current = editor)}
         onEditorChange={handleEditorChange}

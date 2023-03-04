@@ -6,14 +6,7 @@ import Button from "components/Button/index";
 import { Input } from "./styles";
 import { MdModeEdit } from "react-icons/md";
 
-export default function SideMenu({
-  handleCreateNote,
-  open,
-  setOpen,
-  title,
-  setTitle,
-  content,
-}) {
+export default function TitleEdit({ noteData, setNoteData, handleEditNote }){
   return (
     <>
       <CssBaseline />
@@ -24,19 +17,23 @@ export default function SideMenu({
           justifyContent: "space-between",
           alignItems: "center",
         }}
-        open={open}
       >
         <Typography variant="h6" noWrap component="div">
-          <MdModeEdit/>
+          <MdModeEdit />
           <Input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={noteData?.title}
+            onChange={(e) =>
+              setNoteData({ ...noteData, title: e.target.value })
+            }
             className="input-title"
             type="text"
             placeholder="Título"
           />
         </Typography>
-        <Button disabled={!title || !content} onClick={handleCreateNote}>
+        <Button
+          disabled={!noteData?.title || !noteData?.content}
+          onClick={handleEditNote}
+        >
           Salvar
         </Button>
       </Toolbar>

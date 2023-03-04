@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Header from "components/Header/index";
 import Button from "components/Button/index";
-import SideMenu from "components/SideMenu/index";
 import { GridContainer, Container } from "./styles";
-import Editor from "components/Editor/index";
 import api from "api/index";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function EditNote() {
-  const { id } = useParams();
+import TitleEdit from "components/TitleEdit/index";
+import { Editor } from "@tinymce/tinymce-react";
 
-  const [noteData, setNoteData] = useState();
+export default function EditNote() {
+
+  const { id } = useParams();
+  const editorRef = useRef(null);
+
+  const [noteData, setNoteData] = useState([]);
 
   const loadNoteData = async () => {
     const response = await api({
@@ -60,27 +63,65 @@ export default function EditNote() {
     }
   };
 
+  const handleEditorChange = () => {
+    if (editorRef.current) {
+      const newContent = editorRef.current.getContent();
+      setNoteData({ ...noteData, content: newContent});
+    }
+  };
+
+  const renderEditor = () => {
+    return (
+      <Editor
+        apiKey="p3lvus39oh0e16fpli5qfco4oydcib1tel83iussvtdjytjr"
+        onInit={(evt, editor) => (editorRef.current = editor)}
+        initialValue={noteData?.content}
+        onEditorChange={handleEditorChange}
+        init={{
+          language: "pt_BR",
+          height: 500,
+          menubar: "file edit view insert format tools table help",
+          plugins: [
+            "advlist",
+            "autolink",
+            "lists",
+            "link",
+            "image",
+            "charmap",
+            "preview",
+            "anchor",
+            "searchreplace",
+            "visualblocks",
+            "code",
+            "fullscreen",
+            "insertdatetime",
+            "media",
+            "table",
+            "code",
+            "help",
+            "wordcount",
+          ],
+          toolbar:
+            "undo redo | bold italic underline strikethrough fullscreen | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl",
+          content_style:
+            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+        }}
+      />
+    );
+  };
+
   return (
     <GridContainer>
       <Header />
       <Container>
         <div>
-          {/* <SideMenu
-            handleCreateNote={handleCreateNote}
-            open={open}
-            setOpen={setOpen}
-            title={title}
-            setTitle={setTitle}
-            content={content}
-          /> */}
+          <TitleEdit
+            noteData={noteData}
+            setNoteData={setNoteData}
+            handleEditNote={handleEditNote}
+          />
 
-          <div>
-            <Editor
-            // content={content}
-            // setContent={setContent}
-            // handleCreateNote={handleCreateNote}
-            />
-          </div>
+          <div>{renderEditor()}</div>
         </div>
       </Container>
     </GridContainer>

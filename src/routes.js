@@ -20,12 +20,11 @@ const Rotas = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route exact path="/home" element={<Home />}></Route>
         <Route exact path="/register" element={<Register />}></Route>
         <Route exact path="/login" element={<Login />}></Route>
         <Route
-          exact
-          path="/user"
+          path="/"
           element={
             Cookies.get("reactnotes_authtoken") ? (
               <User />

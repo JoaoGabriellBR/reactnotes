@@ -24,7 +24,7 @@ function Register() {
       const response = await api.post("/login", { email, password });
       const { token } = response?.data;
       Cookies.set("reactnotes_authtoken", token);
-      openLink(`/user`);
+      openLink("/");
     } catch (e) {
       console.log(e.message);
       toast.error(e?.response?.data?.error, {
