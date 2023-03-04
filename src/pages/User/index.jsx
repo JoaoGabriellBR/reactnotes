@@ -1,17 +1,17 @@
 import { React, useState, useEffect } from "react";
 import Header from "components/Header/index";
 import Title from "components/Title/index";
-import Button from "components/Button/index";
-import { Container, GridContainer, WidgetArea } from "./styles";
+import { Container, GridContainer, Widget } from "./styles";
 import Cookies from "js-cookie";
 import api from "../../api/index";
-import { GrNotes } from "react-icons/gr";
-import { darkBlue } from "styles/colorProvider";
 import { useNavigate } from "react-router-dom";
+import createNote from "../../assets/createnote.png";
+import moment from "moment";
 
 function User() {
-  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState();
+  const [noteData, setNoteData] = useState([]);
+
   const navigate = useNavigate();
   const hours = new Date();
 
@@ -19,8 +19,33 @@ function User() {
     navigate(link);
   };
 
+  const Horas = () => {
+    return hours >= 6 && hours < 12
+      ? "Bom dia"
+      : hours >= 12 && hours < 18
+      ? "Boa Tarde"
+      : "Boa Noite";
+  };
+
+  const formatedDate = (date) => {
+    return moment(date).format("DD/MM/YYYY HH:mm");
+  };
+
+  const loadNoteData = async () => {
+    const response = await api({
+      method: "GET",
+      url: "/notes",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: Cookies.get("reactnotes_authtoken"),
+      },
+      json: true,
+    });
+
+    setNoteData(response.data.response);
+  };
+
   const loadUserData = async () => {
-    setLoading(true);
     const response = await api({
       method: "GET",
       url: `/user`,
@@ -31,64 +56,59 @@ function User() {
       json: true,
     });
     setUserData(response.data);
-    setLoading(false);
   };
 
   useEffect(() => {
     loadUserData();
   }, []);
 
-  const Horas = () => {
-    return hours >= 6 && hours < 12
-      ? "Bom dia"
-      : hours >= 12 && hours < 18
-      ? "Boa Tarde"
-      : "Boa Noite";
-  };
+  useEffect(() => {
+    loadNoteData();
+  }, []);
 
   return (
     <>
       <GridContainer>
         <Header />
         <Container>
-          {!loading && (
-            <>
-              <div className="div-title">
-                <Title backgroundColor="red" fontSize="25px" color="#000">
-                  {Horas()}, {userData?.name}!
-                </Title>
+          <>
+            <div className="div-title">
+              <Title backgroundColor="red" fontSize="25px" color="#000">
+                {Horas()}, {userData?.name}!
+              </Title>
+            </div>
 
-                <Button onClick={() => openLink("/createnote")}>
-                  + Nova nota
-                </Button>
-              </div>
-
-              <WidgetArea>
-                <div className="widget">
-                  <div className="widget-icon">
-                    <GrNotes style={{ color: darkBlue }} size={24} />
-                  </div>
+            <div className="div-main">
+              {noteData?.map((note) => (
+                <Widget
+                  onClick={() => openLink(`/editnote/${note.id}`)}
+                  padding="0 1rem 0 1rem"
+                >
                   <div className="widget-body">
-                    <p className="widget-title">5</p>
-                    <p className="widget-subtitle">Notas</p>
+                    <h1 className="title">{note.title}</h1>
+                    <p className="content">{note.content}</p>
                   </div>
-                </div>
-              </WidgetArea>
+                  <div className="widget-footer">
+                    <p className="date-created">
+                      {formatedDate(note.updated_at)}
+                    </p>
+                  </div>
+                </Widget>
+              ))}
 
-              <h1>Nota mais recente</h1>
-              <WidgetArea>
-                <div width="400px" className="widget">
-                  <div className="widget-icon">
-                    <GrNotes style={{ color: darkBlue }} size={24} />
-                  </div>
-                  <div className="widget-body">
-                    <p className="widget-title">Título</p>
-                    <p className="widget-subtitle">Conteúdo</p>
-                  </div>
+              <Widget onClick={() => openLink("/createnote")}>
+                <div className="widget-create-note">
+                  <img
+                    width="70px"
+                    height="70px"
+                    src={createNote}
+                    alt="Criar nova nota"
+                  />
+                  <p>Criar nova nota</p>
                 </div>
-              </WidgetArea>
-            </>
-          )}
+              </Widget>
+            </div>
+          </>
         </Container>
       </GridContainer>
     </>

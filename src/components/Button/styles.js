@@ -31,6 +31,7 @@ export const StyledButton = styled.button`
 
     &:disabled {
         opacity: 0.7;
+        cursor: not-allowed;
     }
 
     @media (max-width: 1000px) {

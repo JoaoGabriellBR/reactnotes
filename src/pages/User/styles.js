@@ -24,6 +24,21 @@ export const Container = styled.section`
         padding-left: 0px;
     }
 
+    .div-main{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      background-red;
+
+      @media (max-width: 1000px){
+        flex-direction: column;
+        align-items: center;
+      }
+
+    }
+
     .div-title {
         display: flex;
         flex-direction: row;
@@ -36,29 +51,31 @@ export const Container = styled.section`
     }
 `;
 
-export const WidgetArea = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  flex-wrap: wrap;
-  margin-top: 20px;
-
-  .widget {
+export const Widget = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    width: ${(props) => props.width || "240px"};
-    height: 120px;
+    width: ${(props) => props.width || "180px"};
+    min-height: 240px;
     border-radius: 10px;
     background-color: lightergray;
     color: ${white};
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    margin-right: 10px;
+    margin: 1rem 1rem 1rem 0;
+    padding: ${(props) => props.padding || "10px"};
     cursor: pointer;
+    color: #000;
     transition: all ease-in-out 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &:hover{
+      scale: 1.1;
+      background: ${white};
+    }
 
     @media (max-width: 900px) {
       flex-direction: column;
@@ -66,57 +83,40 @@ export const WidgetArea = styled.div`
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
-      padding: 10px 0px;
+      margin: 0;
       width: 80%;
     }
 
-    &:hover {
-      scale: 1.1;
-      transition: all ease-in-out 0.3s;
-      background-color: ${white};
-      box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
-        rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-    }
+    .widget-body {
+      min-height: 50%;
 
-    .widget-icon {
-      display: flex;
-      flex-direction: column;
-      justify-content: center !important;
-      align-items: center !important;
-      color: ${darkBlue};
-      height: 100%;
-      width: 40%;
-      @media (max-width: 900px) {
-        width: 100%;
+      .title {
+        font-size: 20px;
+      }
+
+      .content {
+        font-size: 14px;
       }
     }
 
-    .widget-body {
+    .widget-footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      min-height: 50%;
+
+      .date-created {
+        font-size: 12px;
+      }
+    }
+
+    .widget-create-note {
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      @media (max-width: 900px) {
-        width: 100%;
-      }
     }
 
-    .widget-title {
-      margin: 0px;
-      font-weight: bold;
-      font-size: 23px;
-      margin-bottom: 3px;
-      color: ${darkBlue};
-      @media (max-width: 900px) {
-        text-align: center;
-      }
-    }
-    .widget-subtitle {
-      margin: 0px;
-      font-size: 16px;
-      color: ${darkBlue};
-      @media (max-width: 900px) {
-        text-align: center;
-      }
-    }
-  }
+
 `;

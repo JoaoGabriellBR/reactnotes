@@ -7,11 +7,18 @@ import Editor from "components/Editor/index";
 import api from "api/index";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateNote() {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const openLink = (link) => {
+    navigate(link);
+  };
 
   const handleCreateNote = async () => {
     try {
@@ -27,8 +34,9 @@ export default function CreateNote() {
           content: content,
         },
       });
+      openLink("/user");
       toast.success("Nota criada com sucesso!", {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
         theme: "colored",
       });
     } catch (e) {
@@ -44,10 +52,22 @@ export default function CreateNote() {
     <GridContainer>
       <Header />
       <Container>
-        <div style={{width: open ? "82.5%" : "100%" }}>
-          <SideMenu handleCreateNote={handleCreateNote} open={open} setOpen={setOpen} title={title} setTitle={setTitle}/>
+        <div>
+          <SideMenu
+            handleCreateNote={handleCreateNote}
+            open={open}
+            setOpen={setOpen}
+            title={title}
+            setTitle={setTitle}
+            content={content}
+          />
+
           <div>
-            <Editor content={content} setContent={setContent} handleCreateNote={handleCreateNote} />
+            <Editor
+              content={content}
+              setContent={setContent}
+              handleCreateNote={handleCreateNote}
+            />
           </div>
         </div>
       </Container>

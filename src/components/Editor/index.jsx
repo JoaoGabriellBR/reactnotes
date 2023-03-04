@@ -17,7 +17,6 @@ export default function Editor({ content, setContent, handleCreateNote }) {
       <TinyMCE
         apiKey="p3lvus39oh0e16fpli5qfco4oydcib1tel83iussvtdjytjr"
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>Conteúdo da sua nota.</p>"
         onEditorChange={handleEditorChange}
         init={{
           language: "pt_BR",
@@ -44,7 +43,7 @@ export default function Editor({ content, setContent, handleCreateNote }) {
             "wordcount",
           ],
           toolbar:
-            "undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl",
+            "undo redo | bold italic underline strikethrough fullscreen | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl",
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
