@@ -9,7 +9,7 @@ import api from "api/index";
 import Cookies from 'js-cookie';
 import { toast } from "react-toastify";
 
-function Register() {
+function Login() {
   const navigate = useNavigate();
 
   const openLink = (link) => {
@@ -84,4 +84,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;

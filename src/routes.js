@@ -2,10 +2,12 @@ import React from "react";
 import Cookies from "js-cookie";
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 
+// USER
 import Home from "pages/Home/index";
 import Register from "pages/Register/index";
 import Login from "pages/Login/index";
 import User from "pages/User/index";
+import Profile from "pages/Profile/index";
 
 //NOTES 
 import CreateNote from "pages/Notes/CreateNote/index";
@@ -50,6 +52,17 @@ const Rotas = () => {
           element={
             Cookies.get("reactnotes_authtoken") ? (
               < EditNote />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        ></Route>
+        <Route
+          exact
+          path="/profile"
+          element={
+            Cookies.get("reactnotes_authtoken") ? (
+              < Profile />
             ) : (
               <Navigate to="/login" />
             )
