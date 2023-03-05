@@ -43,7 +43,7 @@ export default function Profile() {
 
   return (
     <>
-      <Header/>
+      <Header />
       <Container>
         <Form>
           <Title marginBottom="35px" fontSize="30px" color="#000">
@@ -54,61 +54,67 @@ export default function Profile() {
             Dados Pessoais
           </Title>
 
-          <TextField
-            value={userData?.name}
-            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-            placeholder="Digite o seu nome"
-            className="input-form"
-            label="Nome"
-            focused={userData.name !== null}
-          />
-          <TextField
-            value={userData?.email}
-            onChange={(e) =>
-              setUserData({ ...userData, email: e.target.value })
-            }
-            placeholder="Digite o seu e-mail"
-            className="input-form"
-            label="E-mail"
-            focused={userData?.email !== null}
-          />
+          <div className="atualizar-informacoes">
+            <TextField
+              value={userData?.name}
+              onChange={(e) =>
+                setUserData({ ...userData, name: e.target.value })
+              }
+              placeholder="Digite o seu nome"
+              className="input-form"
+              label="Nome"
+              focused={userData.name !== null}
+            />
+            <TextField
+              value={userData?.email}
+              onChange={(e) =>
+                setUserData({ ...userData, email: e.target.value })
+              }
+              placeholder="Digite o seu e-mail"
+              className="input-form"
+              label="E-mail"
+              focused={userData?.email !== null}
+            />
 
-          <Button
-            disabled={!userData?.email || !userData?.password}
-            type="button"
-            // onClick={handleLogin}
-            width="50%"
-          >
-            Atualizar informações
-          </Button>
+            <Button
+              disabled={!userData?.email || !userData?.password}
+              type="button"
+              // onClick={handleLogin}
+              width="50%"
+            >
+              Atualizar informações
+            </Button>
+          </div>
 
           <Title marginBottom="35px" fontSize="30px" color="#000">
             Alterar Senha
           </Title>
 
-          <TextField
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Digite a sua senha atual"
-            className="input-form"
-            label="Senha atual"
-          />
+          <div className="alterar-senha">
+            <TextField
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Digite a sua senha atual"
+              className="input-form"
+              label="Senha atual"
+            />
 
-          <TextField
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Digite a sua nova senha"
-            className="input-form"
-            label="Nova senha"
-          />
-          <Button
-            disabled={!password && !newPassword}
-            type="button"
-            // onClick={handleLogin}
-            width="50%"
-          >
-            Alterar senha
-          </Button>
+            <TextField
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Digite a sua nova senha"
+              className="input-form"
+              label="Nova senha"
+            />
+            <Button
+              disabled={!password && !newPassword}
+              type="button"
+              // onClick={handleLogin}
+              width="50%"
+            >
+              Alterar senha
+            </Button>
+          </div>
         </Form>
       </Container>
     </>

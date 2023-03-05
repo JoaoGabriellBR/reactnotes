@@ -56,8 +56,9 @@ export const Widget = styled.div`
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    width: ${(props) => props.width || "180px"};
-    min-height: 240px;
+    overflow: hidden;
+    width: ${(props) => props.width || "160px"};
+    min-height: 230px;
     border-radius: 10px;
     background-color: lightergray;
     color: ${white};

@@ -13,19 +13,26 @@ function User() {
   const [noteData, setNoteData] = useState([]);
 
   const navigate = useNavigate();
-  const hours = new Date();
 
   const openLink = (link) => {
     navigate(link);
   };
 
-  const Horas = () => {
-    return hours >= 6 && hours < 12
-      ? "Bom dia"
-      : hours >= 12 && hours < 18
-      ? "Boa Tarde"
-      : "Boa Noite";
-  };
+  const Greetings = () => {
+    const now = moment();
+    const hour = now.hour();
+  
+    let greeting;
+    if (hour >= 5 && hour < 12) {
+      greeting = "Bom dia";
+    } else if (hour >= 12 && hour < 18) {
+      greeting = "Boa tarde";
+    } else {
+      greeting = "Boa noite";
+    }
+  
+    return greeting;
+  }
 
   const formatedDate = (date) => {
     return moment(date).format("DD/MM/YYYY HH:mm");
@@ -74,11 +81,23 @@ function User() {
           <>
             <div className="div-title">
               <Title backgroundColor="red" fontSize="25px" color="#000">
-                {Horas()}, {userData?.name}!
+                {Greetings()}, {userData?.name}!
               </Title>
             </div>
 
             <div className="div-main">
+              <Widget onClick={() => openLink("/createnote")}>
+                <div className="widget-create-note">
+                  <img
+                    width="70px"
+                    height="70px"
+                    src={createNote}
+                    alt="Criar nova nota"
+                  />
+                  <p>Criar nova nota</p>
+                </div>
+              </Widget>
+
               {noteData?.map((note) => (
                 <Widget
                   onClick={() => openLink(`/editnote/${note.id}`)}
@@ -99,17 +118,6 @@ function User() {
                 </Widget>
               ))}
 
-              <Widget onClick={() => openLink("/createnote")}>
-                <div className="widget-create-note">
-                  <img
-                    width="70px"
-                    height="70px"
-                    src={createNote}
-                    alt="Criar nova nota"
-                  />
-                  <p>Criar nova nota</p>
-                </div>
-              </Widget>
             </div>
           </>
         </Container>
