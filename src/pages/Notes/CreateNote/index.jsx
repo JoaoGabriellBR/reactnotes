@@ -2,14 +2,13 @@ import React, { useState, useRef } from "react";
 import Header from "components/Header/index";
 import Button from "components/Button/index";
 import { GridContainer, Container } from "./styles";
-import TinyMCE from "components/TinyMCE/index";
 import api from "api/index";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-
-import TitleCreate from "components/TitleCreate/index";
 import { Editor } from "@tinymce/tinymce-react";
+import { Input } from "./styles";
+import { MdModeEdit } from "react-icons/md";
 
 export default function CreateNote() {
   const editorRef = useRef(null);
@@ -101,16 +100,22 @@ export default function CreateNote() {
     <GridContainer>
       <Header />
       <Container>
-        <div>
-          <TitleCreate
-            handleCreateNote={handleCreateNote}
-            title={title}
-            setTitle={setTitle}
-            content={content}
-          />
-
-          <div>{renderEditor()}</div>
+        <div className="div-title">
+          <div>
+            <MdModeEdit />
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              type="text"
+              placeholder="Título"
+            />
+          </div>
+          <Button disabled={!title || !content} onClick={handleCreateNote}>
+            Salvar
+          </Button>
         </div>
+
+        <div style={{ width: "100%" }}>{renderEditor()}</div>
       </Container>
     </GridContainer>
   );

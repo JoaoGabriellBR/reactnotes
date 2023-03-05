@@ -86,7 +86,10 @@ function User() {
                 >
                   <div className="widget-body">
                     <h1 className="title">{note.title}</h1>
-                    <p className="content">{note.content}</p>
+                    <p
+                      dangerouslySetInnerHTML={{ __html: note.content }}
+                      className="content"
+                    ></p>
                   </div>
                   <div className="widget-footer">
                     <p className="date-created">

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { darkBlue, white } from "styles/colorProvider";
 
 export const GridContainer = styled.div`
   display: grid;
@@ -14,16 +13,25 @@ export const GridContainer = styled.div`
 
 export const Container = styled.section`
   grid-area: container;
-  background-color: #f2f2f2;
+  background-color: #fff;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   width: 100%;
 
   @media (max-width: 1000px){
     align-items: center;
     padding: 1rem 0 1rem 0;
+  }
+
+  .div-title {
+    padding: 1rem 1rem 0 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .div-main {
@@ -38,3 +46,11 @@ export const Container = styled.section`
   }
 
 `;
+
+export const Input = styled.input`
+  background: transparent;
+  font-size: 25px;
+  border: none;
+  outline: 0;
+
+`

@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
+import { GridContainer, Container, Input } from "./styles";
 import Header from "components/Header/index";
 import Button from "components/Button/index";
-import { GridContainer, Container } from "./styles";
-import api from "api/index";
+import { useParams } from "react-router-dom";
+import { MdModeEdit } from "react-icons/md";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { useNavigate, useParams } from "react-router-dom";
+import api from "api/index";
 
-import TitleEdit from "components/TitleEdit/index";
 import { Editor } from "@tinymce/tinymce-react";
 
 export default function EditNote() {
-
   const { id } = useParams();
   const editorRef = useRef(null);
 
@@ -28,7 +27,7 @@ export default function EditNote() {
       json: true,
     });
 
-    setNoteData(response.data.response);
+    setNoteData(response.data);
     console.log(noteData);
   };
 
@@ -66,7 +65,7 @@ export default function EditNote() {
   const handleEditorChange = () => {
     if (editorRef.current) {
       const newContent = editorRef.current.getContent();
-      setNoteData({ ...noteData, content: newContent});
+      setNoteData({ ...noteData, content: newContent });
     }
   };
 
@@ -114,15 +113,27 @@ export default function EditNote() {
     <GridContainer>
       <Header />
       <Container>
-        <div>
-          <TitleEdit
-            noteData={noteData}
-            setNoteData={setNoteData}
-            handleEditNote={handleEditNote}
-          />
-
-          <div>{renderEditor()}</div>
+        <div className="div-title">
+          <div>
+            <MdModeEdit />
+            <Input
+              value={noteData?.title}
+              onChange={(e) =>
+                setNoteData({ ...noteData, title: e.target.value })
+              }
+              type="text"
+              placeholder="Título"
+            />
+          </div>
+          <Button
+            disabled={!noteData?.title || !noteData?.content}
+            onClick={handleEditNote}
+          >
+            Salvar
+          </Button>
         </div>
+
+        <div>{renderEditor()}</div>
       </Container>
     </GridContainer>
   );
