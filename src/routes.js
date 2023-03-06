@@ -9,7 +9,7 @@ import Login from "pages/Login/index";
 import User from "pages/User/index";
 import Profile from "pages/Profile/index";
 
-//NOTES 
+//NOTES
 import CreateNote from "pages/Notes/CreateNote/index";
 import EditNote from "pages/Notes/EditNote/index";
 
@@ -27,46 +27,22 @@ const Rotas = () => {
         <Route exact path="/login" element={<Login />}></Route>
         <Route
           path="/"
-          element={
-            Cookies.get("reactnotes_authtoken") ? (
-              <User />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
+          element={isAuthenticated() ? <User /> : <Navigate to="/login" />}
         ></Route>
         <Route
           exact
           path="/createnote"
-          element={
-            Cookies.get("reactnotes_authtoken") ? (
-              <CreateNote />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
+          element={isAuthenticated() ? <CreateNote /> : <Navigate to="/login" />}
         ></Route>
-         <Route
+        <Route
           exact
           path="/editnote/:id"
-          element={
-            Cookies.get("reactnotes_authtoken") ? (
-              < EditNote />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
+          element={isAuthenticated() ? <EditNote /> : <Navigate to="/login" />}
         ></Route>
         <Route
           exact
           path="/profile"
-          element={
-            Cookies.get("reactnotes_authtoken") ? (
-              < Profile />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
+          element={isAuthenticated() ? <Profile /> : <Navigate to="/login" />}
         ></Route>
       </Routes>
     </BrowserRouter>

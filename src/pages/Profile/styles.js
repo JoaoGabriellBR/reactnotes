@@ -28,7 +28,7 @@ export const Form = styled.form`
   }
 
   .input-form {
-    width: 100%;
+    width: 80%;
     height: 55px;
     margin-bottom: 1.5rem;
   }

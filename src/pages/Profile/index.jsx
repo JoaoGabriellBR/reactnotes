@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { Container, LeftBox, RightBox, Div, Form } from "./styles";
 import Title from "components/Title/index";
 import TextField from "@mui/material/TextField";
@@ -19,10 +18,22 @@ export default function Profile() {
   };
 
   const [userData, setUserData] = useState([]);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+
+  const toastSuccess = () => {
+    return toast.success("Senha atualizada com sucesso!", {
+      position: toast.POSITION.TOP_RIGHT,
+      theme: "colored",
+    });
+  };
+
+  const toastError = () => {
+    return toast.error("Não foi possível atualizar a senha", {
+      position: toast.POSITION.TOP_RIGHT,
+      theme: "colored",
+    });
+  };
 
   const loadUserData = async () => {
     const response = await api({
@@ -35,6 +46,51 @@ export default function Profile() {
       json: true,
     });
     setUserData(response.data);
+  };
+
+  const handleUpdateUser = async () => {
+    try {
+      await api({
+        method: "PATCH",
+        url: `/user`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Cookies.get("reactnotes_authtoken"),
+        },
+        data: {
+          name: userData?.name,
+          email: userData?.email,
+        },
+        json: true,
+      });
+      toast.success("Usuário atualizado com sucesso!", {
+        position: toast.POSITION.TOP_RIGHT,
+        theme: "colored",
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  const handleChangePassword = async () => {
+    try {
+      await api({
+        method: "PATCH",
+        url: `/user/change-password`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Cookies.get("reactnotes_authtoken"),
+        },
+        data: {
+          oldPassword: currentPassword,
+          newPassword: newPassword,
+        },
+        json: true,
+      });
+      toastSuccess();
+    } catch (e) {
+      toastError();
+    }
   };
 
   useEffect(() => {
@@ -63,7 +119,7 @@ export default function Profile() {
               placeholder="Digite o seu nome"
               className="input-form"
               label="Nome"
-              focused={userData.name !== null}
+              focused={userData?.name !== null}
             />
             <TextField
               value={userData?.email}
@@ -77,9 +133,9 @@ export default function Profile() {
             />
 
             <Button
-              disabled={!userData?.email || !userData?.password}
+              disabled={!userData?.name || !userData?.email}
               type="button"
-              // onClick={handleLogin}
+              onClick={handleUpdateUser}
               width="50%"
             >
               Atualizar informações
@@ -92,24 +148,24 @@ export default function Profile() {
 
           <div className="alterar-senha">
             <TextField
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
               placeholder="Digite a sua senha atual"
               className="input-form"
               label="Senha atual"
             />
 
             <TextField
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
               placeholder="Digite a sua nova senha"
               className="input-form"
               label="Nova senha"
             />
             <Button
-              disabled={!password && !newPassword}
+              disabled={!currentPassword && !newPassword}
               type="button"
-              // onClick={handleLogin}
+              onClick={handleChangePassword}
               width="50%"
             >
               Alterar senha

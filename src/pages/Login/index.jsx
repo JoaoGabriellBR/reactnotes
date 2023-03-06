@@ -8,16 +8,20 @@ import { useNavigate } from "react-router-dom";
 import api from "api/index";
 import Cookies from 'js-cookie';
 import { toast } from "react-toastify";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
 
 function Login() {
   const navigate = useNavigate();
 
   const openLink = (link) => {
-    navigate(link);
+    return navigate(link);
   };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleLogin = async () => {
     try {
@@ -26,8 +30,7 @@ function Login() {
       Cookies.set("reactnotes_authtoken", token);
       openLink("/");
     } catch (e) {
-      console.log(e.message);
-      toast.error(e?.response?.data?.error, {
+      toast.error("Usuário não encontrado", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
       });
@@ -53,6 +56,7 @@ function Login() {
                 placeholder="Digite o seu e-mail"
                 className="input-form"
                 label="E-mail"
+                type="email"
               />
               <TextField
                 value={password}
@@ -60,7 +64,25 @@ function Login() {
                 placeholder="Digite a sua senha"
                 className="input-form"
                 label="Senha"
+                type={showPassword ? "text" : "password"}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() =>  setShowPassword(!showPassword)}
+                        onMouseDown={(e) => e.preventDefault()}
+                      >
+                        {showPassword ? (
+                          <MdOutlineVisibility />
+                        ) : (
+                          <MdOutlineVisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
+
               <Button
                 disabled={!email || !password}
                 type="button"
