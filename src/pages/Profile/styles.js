@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { white, green, darkBlue } from "styles/colorProvider";
-import background from '../../assets/backgroundnotes.jpg';
 
 export const Container = styled.section`
   overflow-x: hidden;
@@ -28,9 +26,13 @@ export const Form = styled.form`
   }
 
   .input-form {
-    width: 80%;
+    width: 70%;
     height: 55px;
     margin-bottom: 1.5rem;
+
+    @media (max-width: 1000px){
+      width: 100%;
+    }
   }
 
   .atualizar-informacoes, .alterar-senha {

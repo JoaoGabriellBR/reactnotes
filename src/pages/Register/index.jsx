@@ -7,18 +7,22 @@ import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/index";
 import { toast } from "react-toastify";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
 
 function Register() {
   const navigate = useNavigate();
   const openLink = (link) => navigate(link);
-  
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleCreateUser = async () => {
     try {
-      const response = await api({
+      await api({
         method: "POST",
         url: "/user",
         headers: {
@@ -45,6 +49,7 @@ function Register() {
       toast.error(e?.response?.data?.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
+        autoClose: 2000,
       });
     }
   };
@@ -82,6 +87,23 @@ function Register() {
                 placeholder="Digite a sua senha"
                 className="input-form"
                 label="Senha"
+                type={showPassword ? "text" : "password"}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        onMouseDown={(e) => e.preventDefault()}
+                      >
+                        {showPassword ? (
+                          <MdOutlineVisibility />
+                        ) : (
+                          <MdOutlineVisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
               <Button
                 type="button"

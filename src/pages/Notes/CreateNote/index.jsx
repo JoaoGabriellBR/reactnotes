@@ -38,14 +38,16 @@ export default function CreateNote() {
       });
       openLink("/");
       toast.success("Nota criada com sucesso!", {
-        position: "top-right",
+        position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
+        autoClose: 2000
       });
     } catch (e) {
       console.log(e.message);
       toast.error(e?.response?.data?.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
+        autoClose: 2000
       });
     }
   };
@@ -101,7 +103,7 @@ export default function CreateNote() {
       <Header />
       <Container>
         <div className="div-title">
-          <div>
+          <div className="title">
             <MdModeEdit />
             <Input
               value={title}
@@ -110,7 +112,7 @@ export default function CreateNote() {
               placeholder="Título"
             />
           </div>
-          <Button disabled={!title || !content} onClick={handleCreateNote}>
+          <Button style={{ marginRight: "15px" }} disabled={!title || !content} onClick={handleCreateNote}>
             Salvar
           </Button>
         </div>

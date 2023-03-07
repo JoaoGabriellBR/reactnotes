@@ -101,7 +101,7 @@ function User() {
               {noteData?.map((note) => (
                 <Widget
                   onClick={() => openLink(`/editnote/${note.id}`)}
-                  padding="0 1rem 0 1rem"
+                  // padding="0 1rem 0 1rem"
                 >
                   <div className="widget-body">
                     <h1 className="title">{note.title}</h1>

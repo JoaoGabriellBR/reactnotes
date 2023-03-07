@@ -1,39 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Container, LeftBox, RightBox, Div, Form } from "./styles";
+import { Container, Form } from "./styles";
 import Title from "components/Title/index";
 import TextField from "@mui/material/TextField";
 import Header from "components/Header/index";
 import Button from "components/Button/index";
-import logo from "../../assets/logo.png";
-import { useNavigate } from "react-router-dom";
 import api from "api/index";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
 
 export default function Profile() {
-  const navigate = useNavigate();
-
-  const openLink = (link) => {
-    navigate(link);
-  };
-
   const [userData, setUserData] = useState([]);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-
-  const toastSuccess = () => {
-    return toast.success("Senha atualizada com sucesso!", {
-      position: toast.POSITION.TOP_RIGHT,
-      theme: "colored",
-    });
-  };
-
-  const toastError = () => {
-    return toast.error("Não foi possível atualizar a senha", {
-      position: toast.POSITION.TOP_RIGHT,
-      theme: "colored",
-    });
-  };
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
 
   const loadUserData = async () => {
     const response = await api({
@@ -66,9 +49,14 @@ export default function Profile() {
       toast.success("Usuário atualizado com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
+        autoClose: 2000,
       });
     } catch (e) {
-      console.log(e.message);
+      toast.error(e?.response?.data?.error, {
+        position: toast.POSITION.TOP_RIGHT,
+        theme: "colored",
+        autoClose: 2000,
+      });
     }
   };
 
@@ -87,9 +75,17 @@ export default function Profile() {
         },
         json: true,
       });
-      toastSuccess();
+      toast.success("Senha atualizada com sucesso!", {
+        position: toast.POSITION.TOP_RIGHT,
+        theme: "colored",
+        autoClose: 2000,
+      });
     } catch (e) {
-      toastError();
+      toast.error(e?.response?.data?.error, {
+        position: toast.POSITION.TOP_RIGHT,
+        theme: "colored",
+        autoClose: 2000,
+      });
     }
   };
 
@@ -153,6 +149,23 @@ export default function Profile() {
               placeholder="Digite a sua senha atual"
               className="input-form"
               label="Senha atual"
+              type={showCurrentPassword ? 'text' : 'password'}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                      onMouseDown={(e) => e.preventDefault()}
+                    >
+                      {showCurrentPassword ? (
+                        <MdOutlineVisibility />
+                      ) : (
+                        <MdOutlineVisibilityOff />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
 
             <TextField
@@ -161,6 +174,25 @@ export default function Profile() {
               placeholder="Digite a sua nova senha"
               className="input-form"
               label="Nova senha"
+              type={showNewPassword ? 'text' : 'password'}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() =>
+                        setShowNewPassword(!showNewPassword)
+                      }
+                      onMouseDown={(e) => e.preventDefault()}
+                    >
+                      {showNewPassword ? (
+                        <MdOutlineVisibility />
+                      ) : (
+                        <MdOutlineVisibilityOff />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
             <Button
               disabled={!currentPassword && !newPassword}

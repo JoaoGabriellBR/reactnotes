@@ -26,12 +26,23 @@ export const Container = styled.section`
   }
 
   .div-title {
-    padding: 1rem 1rem 0 1rem;
+    margin: 1rem;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 1000px){
+      margin: 1rem 0 1rem 0;
+    }
+
+    .title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-left: 15px;
+    }
   }
 
   .div-main {

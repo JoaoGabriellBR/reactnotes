@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { GridContainer, Container, Input } from "./styles";
+import { Container, Input } from "./styles";
 import Header from "components/Header/index";
 import Button from "components/Button/index";
 import { useParams } from "react-router-dom";
@@ -50,14 +50,16 @@ export default function EditNote() {
         },
       });
       toast.success("Nota atualizada com sucesso!", {
-        position: "top-right",
+        position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
+        autoClose: 2000
       });
     } catch (e) {
       console.log(e.message);
       toast.error(e?.response?.data?.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
+        autoClose: 2000
       });
     }
   };
@@ -110,11 +112,11 @@ export default function EditNote() {
   };
 
   return (
-    <GridContainer>
+    <>
       <Header />
       <Container>
         <div className="div-title">
-          <div>
+          <div className="title">
             <MdModeEdit />
             <Input
               value={noteData?.title}
@@ -125,16 +127,29 @@ export default function EditNote() {
               placeholder="Título"
             />
           </div>
+
+          <div className="div-buttons">
+
+          <Button
+            onClick={handleEditNote}
+            style={{ marginRight: "15px"}}
+            outlined
+          >
+            Excluir
+          </Button>
+
           <Button
             disabled={!noteData?.title || !noteData?.content}
             onClick={handleEditNote}
+            style={{ marginRight: "15px"}}
           >
-            Salvar
+            Atualizar
           </Button>
+          </div>
         </div>
 
-        <div>{renderEditor()}</div>
+        <div className="div-editor">{renderEditor()}</div>
       </Container>
-    </GridContainer>
+    </>
   );
 }

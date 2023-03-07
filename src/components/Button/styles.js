@@ -6,9 +6,9 @@ export const StyledButton = styled.button`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: ${green};
+    background: ${(props) => props.outlined ? "transparent" : green};
     color: ${black};
-    border: none;
+    border: ${(props) => props.outlined ? `2px solid ${green}` : "none"};
     border-radius: 8px;
     width: ${(props) => props.width || '100px'};
     min-height: ${(props) => props.height || '40px'};
@@ -22,9 +22,8 @@ export const StyledButton = styled.button`
     font-size: 1rem;
     
     &&:hover {
-        border: ${(props) => props.outlined ? `1.5px solid ${green}` : 'none'};
-        color: ${(props) => props.outlined ? white : black};
-        background: ${(props) => props.outlined ? 'transparent' : green};
+        color: ${black};
+        background: ${(props) => props.outlined ? green : green};
         transition: 0.2s ease-in-out;
         opacity: 0.8;
     }
