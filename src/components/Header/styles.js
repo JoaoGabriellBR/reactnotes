@@ -10,7 +10,7 @@ export const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: 1000px){
+  @media (max-width: 1000px) {
     padding: 0;
   }
 `;
@@ -22,9 +22,8 @@ export const DivLogo = styled.div`
   align-items: center;
   cursor: pointer;
 
-
   @media (max-width: 1200px) {
-      padding-left: 40px;
+    padding-left: 40px;
   }
 
   .logo {
@@ -34,8 +33,7 @@ export const DivLogo = styled.div`
 `;
 
 export const DivIcon = styled.div`
-
   @media (max-width: 1200px) {
     padding-right: 40px;
-}
+  }
 `;

@@ -20,7 +20,7 @@ export const Container = styled.section`
   justify-content: flex-start;
   width: 100%;
 
-  @media (max-width: 1000px){
+  @media (max-width: 1000px) {
     align-items: center;
     padding: 1rem 0 1rem 0;
   }
@@ -33,7 +33,7 @@ export const Container = styled.section`
     justify-content: space-between;
     align-items: center;
 
-    @media (max-width: 1000px){
+    @media (max-width: 1000px) {
       margin: 1rem 0 1rem 0;
     }
 
@@ -53,9 +53,8 @@ export const Container = styled.section`
   }
 
   .div-editor {
-     width: ${props => props.width || "100%"};
+    width: ${(props) => props.width || "100%"};
   }
-
 `;
 
 export const Input = styled.input`
@@ -63,5 +62,4 @@ export const Input = styled.input`
   font-size: 25px;
   border: none;
   outline: 0;
-
-`
+`;

@@ -31,7 +31,7 @@ function Header() {
     Cookies.remove("reactnotes_authtoken");
     openLink("/login");
   };
-  
+
   return (
     <StyledHeader>
       <DivLogo onClick={() => openLink("/")}>

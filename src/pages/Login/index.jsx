@@ -1,23 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, LeftBox, RightBox, Div, Form, LinkButton } from "./styles";
 import Title from "components/Title/index";
-import TextField from "@mui/material/TextField";
 import Button from "components/Button/index";
 import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import api from "api/index";
 import Cookies from 'js-cookie';
 import { toast } from "react-toastify";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
+import {IconButton, InputAdornment, TextField} from "@mui/material";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
 
 function Login() {
   const navigate = useNavigate();
 
-  const openLink = (link) => {
-    return navigate(link);
-  };
+  const openLink = (link) => navigate(link);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

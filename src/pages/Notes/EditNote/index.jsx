@@ -2,21 +2,36 @@ import React, { useEffect, useState, useRef } from "react";
 import { Container, Input } from "./styles";
 import Header from "components/Header/index";
 import Button from "components/Button/index";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { MdModeEdit } from "react-icons/md";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import api from "api/index";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@mui/material";
 
 import { Editor } from "@tinymce/tinymce-react";
+import CircularProgress from "@mui/material/CircularProgress";
+import { green } from "styles/colorProvider";
 
 export default function EditNote() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const editorRef = useRef(null);
 
   const [noteData, setNoteData] = useState([]);
+  const [showDeleteNote, setShowDeleteNote] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const openLink = (link) => navigate(link);
 
   const loadNoteData = async () => {
+    setLoading(true);
     const response = await api({
       method: "GET",
       url: `/note/${id}`,
@@ -28,6 +43,7 @@ export default function EditNote() {
     });
 
     setNoteData(response.data);
+    setLoading(false);
     console.log(noteData);
   };
 
@@ -35,7 +51,7 @@ export default function EditNote() {
     loadNoteData();
   }, []);
 
-  const handleEditNote = async () => {
+  const handleUpdateNote = async () => {
     try {
       await api({
         method: "PATCH",
@@ -52,14 +68,39 @@ export default function EditNote() {
       toast.success("Nota atualizada com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
-        autoClose: 2000
+        autoClose: 2000,
       });
     } catch (e) {
       console.log(e.message);
       toast.error(e?.response?.data?.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
-        autoClose: 2000
+        autoClose: 2000,
+      });
+    }
+  };
+
+  const handleDeleteNote = async () => {
+    try {
+      await api({
+        method: "DELETE",
+        url: `/note/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Cookies.get("reactnotes_authtoken"),
+        },
+      });
+      openLink("/");
+      toast.success("Nota excluída com sucesso!", {
+        position: toast.POSITION.TOP_RIGHT,
+        theme: "colored",
+        autoClose: 2000,
+      });
+    } catch (e) {
+      toast.error(e?.response?.data?.error, {
+        position: toast.POSITION.TOP_RIGHT,
+        theme: "colored",
+        autoClose: 2000,
       });
     }
   };
@@ -76,7 +117,7 @@ export default function EditNote() {
       <Editor
         apiKey="p3lvus39oh0e16fpli5qfco4oydcib1tel83iussvtdjytjr"
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue={noteData?.content}
+        value={noteData?.content}
         onEditorChange={handleEditorChange}
         init={{
           language: "pt_BR",
@@ -111,44 +152,85 @@ export default function EditNote() {
     );
   };
 
-  return (
-    <>
-      <Header />
-      <Container>
-        <div className="div-title">
-          <div className="title">
-            <MdModeEdit />
-            <Input
-              value={noteData?.title}
-              onChange={(e) =>
-                setNoteData({ ...noteData, title: e.target.value })
-              }
-              type="text"
-              placeholder="Título"
-            />
-          </div>
+  const renderDeleteNote = () => {
+    return (
+      <Dialog
+        onClose={() => setShowDeleteNote(false)}
+        fullWidth
+        open={showDeleteNote}
+      >
+        <DialogTitle>Excluir Nota</DialogTitle>
 
-          <div className="div-buttons">
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Você tem certeza que deseja excluir esta nota?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            disabled={!noteData?.title || !noteData?.content}
+            onClick={() => setShowDeleteNote(false)}
+            style={{ scale: "90%" }}
+            outlined
+          >
+            Cancelar
+          </Button>
 
           <Button
-            onClick={handleEditNote}
-            style={{ marginRight: "15px"}}
-            outlined
+            onClick={handleDeleteNote}
+            style={{ marginLeft: "5px", scale: "90%" }}
           >
             Excluir
           </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  };
 
-          <Button
-            disabled={!noteData?.title || !noteData?.content}
-            onClick={handleEditNote}
-            style={{ marginRight: "15px"}}
-          >
-            Atualizar
-          </Button>
-          </div>
-        </div>
+  return (
+    <>
+      {renderDeleteNote()}
+      <Header />
+      <Container>
+        {loading ? (
+          <CircularProgress sx={{ color: green }} style={{ margin: "3rem" }}/>
+        ) : (
+          <>
+            <div className="div-title">
+              <div className="title">
+                <MdModeEdit />
+                <Input
+                  value={noteData?.title}
+                  onChange={(e) =>
+                    setNoteData({ ...noteData, title: e.target.value })
+                  }
+                  type="text"
+                  placeholder="Título"
+                />
+              </div>
 
-        <div className="div-editor">{renderEditor()}</div>
+              <div className="div-buttons">
+                <Button
+                  onClick={() => setShowDeleteNote(true)}
+                  style={{ marginRight: "15px" }}
+                  outlined
+                >
+                  Excluir
+                </Button>
+
+                <Button
+                  disabled={!noteData?.title || !noteData?.content}
+                  onClick={handleUpdateNote}
+                  style={{ marginRight: "15px" }}
+                >
+                  Atualizar
+                </Button>
+              </div>
+            </div>
+
+            <div className="div-editor">{renderEditor()}</div>
+          </>
+        )}
       </Container>
     </>
   );

@@ -7,10 +7,13 @@ import api from "../../api/index";
 import { useNavigate } from "react-router-dom";
 import createNote from "../../assets/createnote.png";
 import moment from "moment";
+import CircularProgress from "@mui/material/CircularProgress";
+import { green } from "styles/colorProvider";
 
 function User() {
   const [userData, setUserData] = useState();
   const [noteData, setNoteData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,7 +24,7 @@ function User() {
   const Greetings = () => {
     const now = moment();
     const hour = now.hour();
-  
+
     let greeting;
     if (hour >= 5 && hour < 12) {
       greeting = "Bom dia";
@@ -30,15 +33,16 @@ function User() {
     } else {
       greeting = "Boa noite";
     }
-  
+
     return greeting;
-  }
+  };
 
   const formatedDate = (date) => {
     return moment(date).format("DD/MM/YYYY HH:mm");
   };
 
   const loadNoteData = async () => {
+    setLoading(true);
     const response = await api({
       method: "GET",
       url: "/notes",
@@ -50,9 +54,11 @@ function User() {
     });
 
     setNoteData(response.data.response);
+    setLoading(false);
   };
 
   const loadUserData = async () => {
+    setLoading(true);
     const response = await api({
       method: "GET",
       url: `/user`,
@@ -63,6 +69,7 @@ function User() {
       json: true,
     });
     setUserData(response.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -78,48 +85,51 @@ function User() {
       <GridContainer>
         <Header />
         <Container>
-          <>
-            <div className="div-title">
-              <Title backgroundColor="red" fontSize="25px" color="#000">
-                {Greetings()}, {userData?.name}!
+          {loading ? (
+            <CircularProgress sx={{ color: green }} />
+          ) : (
+            <>
+              <Title
+                className="title-name"
+                backgroundColor="red"
+                fontSize="25px"
+                color="#000"
+              >
+                {Greetings()}, {userData?.name.split(" ")[0]}!
               </Title>
-            </div>
 
-            <div className="div-main">
-              <Widget onClick={() => openLink("/createnote")}>
-                <div className="widget-create-note">
-                  <img
-                    width="70px"
-                    height="70px"
-                    src={createNote}
-                    alt="Criar nova nota"
-                  />
-                  <p>Criar nova nota</p>
-                </div>
-              </Widget>
-
-              {noteData?.map((note) => (
-                <Widget
-                  onClick={() => openLink(`/editnote/${note.id}`)}
-                  // padding="0 1rem 0 1rem"
-                >
-                  <div className="widget-body">
-                    <h1 className="title">{note.title}</h1>
-                    <p
-                      dangerouslySetInnerHTML={{ __html: note.content }}
-                      className="content"
-                    ></p>
-                  </div>
-                  <div className="widget-footer">
-                    <p className="date-created">
-                      {formatedDate(note.updated_at)}
-                    </p>
+              <div className="div-main">
+                <Widget onClick={() => openLink("/createnote")}>
+                  <div className="widget-create-note">
+                    <img
+                      width="70px"
+                      height="70px"
+                      src={createNote}
+                      alt="Criar nova nota"
+                    />
+                    <p>Criar nova nota</p>
                   </div>
                 </Widget>
-              ))}
 
-            </div>
-          </>
+                {noteData?.map((note) => (
+                  <Widget onClick={() => openLink(`/editnote/${note.id}`)}>
+                    <div className="widget-body">
+                      <h1 className="title">{note.title}</h1>
+                      <p
+                        dangerouslySetInnerHTML={{ __html: note.content }}
+                        className="content"
+                      ></p>
+                    </div>
+                    <div className="widget-footer">
+                      <p className="date-created">
+                        {formatedDate(note.updated_at)}
+                      </p>
+                    </div>
+                  </Widget>
+                ))}
+              </div>
+            </>
+          )}
         </Container>
       </GridContainer>
     </>

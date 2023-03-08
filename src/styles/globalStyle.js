@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { darkBlue, white } from "./colorProvider";
+import { darkBlue } from "./colorProvider";
 
 export const GlobalStyle = createGlobalStyle`
     body {

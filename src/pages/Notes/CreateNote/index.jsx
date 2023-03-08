@@ -9,18 +9,18 @@ import { useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { Input } from "./styles";
 import { MdModeEdit } from "react-icons/md";
+import CircularProgress from "@mui/material/CircularProgress";
+import { green } from "styles/colorProvider";
 
 export default function CreateNote() {
   const editorRef = useRef(null);
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
+  const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate();
-
-  const openLink = (link) => {
-    navigate(link);
-  };
+  const openLink = (link) => navigate(link);
 
   const handleCreateNote = async () => {
     try {
@@ -40,14 +40,14 @@ export default function CreateNote() {
       toast.success("Nota criada com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
-        autoClose: 2000
+        autoClose: 2000,
       });
     } catch (e) {
       console.log(e.message);
       toast.error(e?.response?.data?.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
-        autoClose: 2000
+        autoClose: 2000,
       });
     }
   };
@@ -102,22 +102,32 @@ export default function CreateNote() {
     <GridContainer>
       <Header />
       <Container>
-        <div className="div-title">
-          <div className="title">
-            <MdModeEdit />
-            <Input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              type="text"
-              placeholder="Título"
-            />
-          </div>
-          <Button style={{ marginRight: "15px" }} disabled={!title || !content} onClick={handleCreateNote}>
-            Salvar
-          </Button>
-        </div>
+        {loading ? (
+          <CircularProgress sx={{ color: green }} />
+        ) : (
+          <>
+            <div className="div-title">
+              <div className="title">
+                <MdModeEdit />
+                <Input
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  type="text"
+                  placeholder="Título"
+                />
+              </div>
+              <Button
+                style={{ marginRight: "15px" }}
+                disabled={!title || !content}
+                onClick={handleCreateNote}
+              >
+                Salvar
+              </Button>
+            </div>
 
-        <div style={{ width: "100%" }}>{renderEditor()}</div>
+            <div style={{ width: "100%" }}>{renderEditor()}</div>
+          </>
+        )}
       </Container>
     </GridContainer>
   );
