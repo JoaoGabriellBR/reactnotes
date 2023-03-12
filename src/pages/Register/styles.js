@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { white, green, darkBlue } from "styles/colorProvider";
-import background from '../../assets/backgroundnotes.jpg';
+import { green, darkBlue } from "styles/colorProvider";
+import background from "../../assets/backgroundnotes.jpg";
 
 export const Container = styled.section`
   overflow-x: hidden;
@@ -38,9 +38,9 @@ export const LeftBox = styled.div`
   background-color: #000000;
   background-size: cover;
   background-repeat: no-repeat;
-  
+
   &&:before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 0;
@@ -103,12 +103,12 @@ export const Form = styled.form`
 `;
 
 export const LinkButton = styled.p`
-    color: #000;
-    text-decoration: underline;
-    cursor: pointer;
-    margin-left: 5px;
+  color: #000;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 5px;
 
-    &&:hover {
-        color: ${green};
-    }
+  &&:hover {
+    color: ${green};
+  }
 `;

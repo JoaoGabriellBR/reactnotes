@@ -11,7 +11,6 @@ export const Container = styled.section`
   min-height: 100%;
 `;
 
-
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -30,12 +29,13 @@ export const Form = styled.form`
     height: 55px;
     margin-bottom: 1.5rem;
 
-    @media (max-width: 1000px){
+    @media (max-width: 1000px) {
       width: 100%;
     }
   }
 
-  .atualizar-informacoes, .alterar-senha {
+  .atualizar-informacoes,
+  .alterar-senha {
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -43,8 +43,8 @@ export const Form = styled.form`
     align-items: flex-start;
     margin-bottom: 2rem;
 
-    @media (max-width: 1000px){
-        width: 80%;
+    @media (max-width: 1000px) {
+      width: 80%;
     }
   }
 `;

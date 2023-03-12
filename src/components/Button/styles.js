@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { green, white, black } from "../../styles/colorProvider";
+import { green, black } from "../../styles/colorProvider";
 
 export const StyledButton = styled.button`
   display: flex;

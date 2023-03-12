@@ -23,6 +23,7 @@ export default function CreateNote() {
   const openLink = (link) => navigate(link);
 
   const handleCreateNote = async () => {
+    setLoading(true);
     try {
       await api({
         method: "POST",
@@ -42,6 +43,7 @@ export default function CreateNote() {
         theme: "colored",
         autoClose: 2000,
       });
+      setLoading(false);
     } catch (e) {
       console.log(e.message);
       toast.error(e?.response?.data?.error, {
@@ -117,9 +119,10 @@ export default function CreateNote() {
                 />
               </div>
               <Button
-                style={{ marginRight: "15px" }}
+                className="salvar"
                 disabled={!title || !content}
                 onClick={handleCreateNote}
+                mobile="30%"
               >
                 Salvar
               </Button>

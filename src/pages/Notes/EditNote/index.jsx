@@ -193,7 +193,7 @@ export default function EditNote() {
       <Header />
       <Container>
         {loading ? (
-          <CircularProgress sx={{ color: green }} style={{ margin: "3rem" }}/>
+          <CircularProgress sx={{ color: green }} style={{ margin: "3rem" }} />
         ) : (
           <>
             <div className="div-title">

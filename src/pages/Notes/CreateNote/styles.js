@@ -19,6 +19,7 @@ export const Container = styled.section`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  overflow: hidden;
 
   @media (max-width: 1000px) {
     align-items: center;
@@ -32,9 +33,11 @@ export const Container = styled.section`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
     @media (max-width: 1000px) {
-      margin: 1rem 0 1rem 0;
+      margin-left: 2rem;
+      justify-content: flex-start;
     }
 
     .title {
@@ -42,6 +45,13 @@ export const Container = styled.section`
       flex-direction: row;
       align-items: center;
       margin-left: 15px;
+    }
+
+    .salvar {
+      margin-right: 1rem;
+      @media (max-width: 1000px) {
+        margin-top: 1rem;
+      }
     }
   }
 

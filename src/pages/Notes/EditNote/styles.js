@@ -19,9 +19,11 @@ export const Container = styled.section`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
-    @media (max-width: 1000px){
-      margin: 1rem 0 1rem 0;
+    @media (max-width: 1000px) {
+      margin-left: 2rem;
+      justify-content: flex-start;
     }
 
     .title {
@@ -31,11 +33,15 @@ export const Container = styled.section`
       margin-left: 15px;
     }
 
-    .div-buttons{
+    .div-buttons {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
       align-items: center;
+
+      @media (max-width: 1000px) {
+        margin-top: 1rem;
+      }
     }
   }
 

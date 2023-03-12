@@ -149,12 +149,14 @@ export default function Profile() {
               placeholder="Digite a sua senha atual"
               className="input-form"
               label="Senha atual"
-              type={showCurrentPassword ? 'text' : 'password'}
+              type={showCurrentPassword ? "text" : "password"}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                      onClick={() =>
+                        setShowCurrentPassword(!showCurrentPassword)
+                      }
                       onMouseDown={(e) => e.preventDefault()}
                     >
                       {showCurrentPassword ? (
@@ -174,14 +176,12 @@ export default function Profile() {
               placeholder="Digite a sua nova senha"
               className="input-form"
               label="Nova senha"
-              type={showNewPassword ? 'text' : 'password'}
+              type={showNewPassword ? "text" : "password"}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      onClick={() =>
-                        setShowNewPassword(!showNewPassword)
-                      }
+                      onClick={() => setShowNewPassword(!showNewPassword)}
                       onMouseDown={(e) => e.preventDefault()}
                     >
                       {showNewPassword ? (
