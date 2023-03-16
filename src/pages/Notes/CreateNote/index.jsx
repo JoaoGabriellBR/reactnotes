@@ -69,7 +69,7 @@ export default function CreateNote() {
         onEditorChange={handleEditorChange}
         init={{
           language: "pt_BR",
-          height: 500,
+          height: "100%",
           menubar: "file edit view insert format tools table help",
           plugins: [
             "advlist",
@@ -119,7 +119,6 @@ export default function CreateNote() {
                 />
               </div>
               <Button
-                className="salvar"
                 disabled={!title || !content}
                 onClick={handleCreateNote}
                 mobile="30%"
@@ -128,7 +127,7 @@ export default function CreateNote() {
               </Button>
             </div>
 
-            <div style={{ width: "100%" }}>{renderEditor()}</div>
+            <div className="div-editor">{renderEditor()}</div>
           </>
         )}
       </Container>

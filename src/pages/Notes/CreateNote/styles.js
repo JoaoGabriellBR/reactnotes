@@ -14,56 +14,24 @@ export const GridContainer = styled.div`
 export const Container = styled.section`
   grid-area: container;
   background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  overflow: hidden;
-
-  @media (max-width: 1000px) {
-    align-items: center;
-    padding: 1rem 0 1rem 0;
-  }
 
   .div-title {
-    margin: 1rem;
-    width: 100%;
+    padding: 0.5rem 1.4rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 
-    @media (max-width: 1000px) {
-      margin-left: 2rem;
-      justify-content: flex-start;
-    }
-
-    .title {
+    .title{
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
       align-items: center;
-      margin-left: 15px;
     }
-
-    .salvar {
-      margin-right: 1rem;
-      @media (max-width: 1000px) {
-        margin-top: 1rem;
-      }
-    }
-  }
-
-  .div-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
   .div-editor {
-    width: ${(props) => props.width || "100%"};
+    height: 100vh;
   }
 `;
 
