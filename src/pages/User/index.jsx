@@ -106,6 +106,7 @@ function User() {
                       height="70px"
                       src={createNote}
                       alt="Criar nova nota"
+                      loading="lazy"
                     />
                     <p>Criar nova nota</p>
                   </div>

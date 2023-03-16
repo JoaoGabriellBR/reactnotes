@@ -59,7 +59,12 @@ function Register() {
       <Container>
         <Div>
           <LeftBox>
-            <img className="logo" src={logo} alt="Logo React Notes" />
+            <img
+              className="logo"
+              src={logo}
+              alt="Logo React Notes"
+              loading="lazy"
+            />
           </LeftBox>
 
           <RightBox>

@@ -1,9 +1,5 @@
-import { StyledButton } from './styles';
+import { StyledButton } from "./styles";
 
 export default function Button({ children, ...props }) {
-    return (
-        <StyledButton {...props}>
-            {children}
-        </StyledButton>
-    );
+  return <StyledButton {...props}>{children}</StyledButton>;
 }

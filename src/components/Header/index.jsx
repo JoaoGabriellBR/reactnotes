@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyledHeader, DivLogo, DivIcon } from "./styles";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";
@@ -35,7 +35,12 @@ function Header() {
   return (
     <StyledHeader>
       <DivLogo onClick={() => openLink("/")}>
-        <img className="logo" src={Logo} alt="Logo React Notes" />
+        <img
+          className="logo"
+          src={Logo}
+          alt="Logo React Notes"
+          loading="lazy"
+        />
         <Title marginRight="10px" fontSize="18px">
           React Notes
         </Title>

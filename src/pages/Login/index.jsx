@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Container, LeftBox, RightBox, Div, Form, LinkButton } from "./styles";
 import Title from "components/Title/index";
 import Button from "components/Button/index";
 import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import api from "api/index";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import {IconButton, InputAdornment, TextField} from "@mui/material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
 
 function Login() {
@@ -38,7 +38,12 @@ function Login() {
       <Container>
         <Div>
           <LeftBox>
-            <img className="logo" src={logo} alt="Logo React Notes" />
+            <img
+              className="logo"
+              src={logo}
+              alt="Logo React Notes"
+              loading="lazy"
+            />
           </LeftBox>
 
           <RightBox>
@@ -65,7 +70,7 @@ function Login() {
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
-                        onClick={() =>  setShowPassword(!showPassword)}
+                        onClick={() => setShowPassword(!showPassword)}
                         onMouseDown={(e) => e.preventDefault()}
                       >
                         {showPassword ? (
