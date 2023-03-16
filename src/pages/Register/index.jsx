@@ -10,17 +10,20 @@ import { toast } from "react-toastify";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
+import ReactLoading from "react-loading";
 
 function Register() {
   const navigate = useNavigate();
   const openLink = (link) => navigate(link);
 
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleCreateUser = async () => {
+    setLoading(true);
     try {
       await api({
         method: "POST",
@@ -35,6 +38,7 @@ function Register() {
         },
         json: true,
       });
+      setLoading(false);
       setName("");
       setEmail("");
       setPassword("");
@@ -45,7 +49,7 @@ function Register() {
       });
       navigate("/login");
     } catch (e) {
-      console.log(e.message);
+      setLoading(false);
       toast.error(e?.response?.data?.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
@@ -78,6 +82,7 @@ function Register() {
                 placeholder="Digite o seu nome"
                 className="input-form"
                 label="Nome"
+                type="text"
               />
               <TextField
                 value={email}
@@ -85,6 +90,7 @@ function Register() {
                 placeholder="Digite o seu e-mail"
                 className="input-form"
                 label="E-mail"
+                type="email"
               />
               <TextField
                 value={password}
@@ -117,7 +123,16 @@ function Register() {
                 disabled={!name || !email || !password}
                 onClick={handleCreateUser}
               >
-                Cadastrar
+                {loading ? (
+                  <ReactLoading
+                    color={"#fff"}
+                    height={24}
+                    width={24}
+                    type="spin"
+                  />
+                ) : (
+                  "Cadastrar"
+                )}
               </Button>
               <div className="entre">
                 <p> Já tem uma conta?</p>

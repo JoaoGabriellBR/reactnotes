@@ -18,6 +18,7 @@ import {
 import { Editor } from "@tinymce/tinymce-react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "styles/colorProvider";
+import ReactLoading from "react-loading";
 
 export default function EditNote() {
   const { id } = useParams();
@@ -27,6 +28,7 @@ export default function EditNote() {
   const [noteData, setNoteData] = useState([]);
   const [showDeleteNote, setShowDeleteNote] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
 
   const openLink = (link) => navigate(link);
 
@@ -52,6 +54,7 @@ export default function EditNote() {
   }, []);
 
   const handleUpdateNote = async () => {
+    setLoadingUpdate(true);
     try {
       await api({
         method: "PATCH",
@@ -65,13 +68,14 @@ export default function EditNote() {
           content: noteData?.content,
         },
       });
+      setLoadingUpdate(false);
       toast.success("Nota atualizada com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
         autoClose: 2000,
       });
     } catch (e) {
-      console.log(e.message);
+      setLoadingUpdate(false);
       toast.error(e?.response?.data?.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
@@ -193,7 +197,9 @@ export default function EditNote() {
       <Header />
       <Container>
         {loading ? (
-          <CircularProgress sx={{ color: green }} style={{ margin: "3rem" }} />
+          <div className="div-loading">
+            <CircularProgress sx={{ color: green, margin: "3rem" }} />
+          </div>
         ) : (
           <>
             <div className="div-title">
@@ -223,7 +229,16 @@ export default function EditNote() {
                   onClick={handleUpdateNote}
                   style={{ marginRight: "15px" }}
                 >
-                  Atualizar
+                {loadingUpdate ? (
+                  <ReactLoading
+                    color={"#fff"}
+                    height={24}
+                    width={24}
+                    type="spin"
+                  />
+                ) : (
+                  "Atualizar"
+                )}
                 </Button>
               </div>
             </div>

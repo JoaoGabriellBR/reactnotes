@@ -9,23 +9,28 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
+import ReactLoading from "react-loading";
 
 function Login() {
   const navigate = useNavigate();
 
   const openLink = (link) => navigate(link);
 
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
+    setLoading(true);
     try {
       const response = await api.post("/login", { email, password });
       const { token } = response?.data;
       Cookies.set("reactnotes_authtoken", token);
       openLink("/");
+      setLoading(false);
     } catch (e) {
+      setLoading(false);
       toast.error("Usuário não encontrado", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
@@ -90,7 +95,16 @@ function Login() {
                 onClick={handleLogin}
                 width="50%"
               >
-                Entrar
+                {loading ? (
+                  <ReactLoading
+                    color={"#fff"}
+                    height={24}
+                    width={24}
+                    type="spin"
+                  />
+                ) : (
+                  "Entrar"
+                )}
               </Button>
 
               <div className="registrar">

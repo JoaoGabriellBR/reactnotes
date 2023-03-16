@@ -3,6 +3,15 @@ import styled from "styled-components";
 export const Container = styled.section`
   grid-area: container;
   background-color: #fff;
+
+  .div-loading {
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
   
   .div-title {
     padding: 0.5rem 1.4rem;

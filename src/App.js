@@ -3,6 +3,7 @@ import { GlobalStyle } from "styles/globalStyle";
 import Rotas from "./routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./styles/fontProvider.css";
 
 function App() {
   return (
