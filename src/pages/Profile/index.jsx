@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
+import ReactLoading from "react-loading";
 
 export default function Profile() {
   const [userData, setUserData] = useState([]);
@@ -17,6 +18,8 @@ export default function Profile() {
   const [newPassword, setNewPassword] = useState("");
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
+  const [loadingUpdatePassword, setLoadingUpdatePassword] = useState(false);
 
   const loadUserData = async () => {
     const response = await api({
@@ -32,6 +35,7 @@ export default function Profile() {
   };
 
   const handleUpdateUser = async () => {
+    setLoadingUpdate(true);
     try {
       await api({
         method: "PATCH",
@@ -46,12 +50,14 @@ export default function Profile() {
         },
         json: true,
       });
+      setLoadingUpdate(false);
       toast.success("Usuário atualizado com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
         autoClose: 2000,
       });
     } catch (e) {
+      setLoadingUpdate(false);
       toast.error(e?.response?.data?.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
@@ -61,6 +67,7 @@ export default function Profile() {
   };
 
   const handleChangePassword = async () => {
+    setLoadingUpdatePassword(true);
     try {
       await api({
         method: "PATCH",
@@ -75,12 +82,14 @@ export default function Profile() {
         },
         json: true,
       });
+      setLoadingUpdatePassword(false);
       toast.success("Senha atualizada com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
         autoClose: 2000,
       });
     } catch (e) {
+      setLoadingUpdatePassword(false);
       toast.error(e?.response?.data?.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
@@ -134,7 +143,16 @@ export default function Profile() {
               onClick={handleUpdateUser}
               width="50%"
             >
-              Atualizar informações
+              {loadingUpdate ? (
+                <ReactLoading
+                  color={"#fff"}
+                  height={24}
+                  width={24}
+                  type="spin"
+                />
+              ) : (
+                "Atualizar informações"
+              )}
             </Button>
           </div>
 
@@ -200,7 +218,16 @@ export default function Profile() {
               onClick={handleChangePassword}
               width="50%"
             >
-              Alterar senha
+              {loadingUpdatePassword ? (
+                <ReactLoading
+                  color={"#fff"}
+                  height={24}
+                  width={24}
+                  type="spin"
+                />
+              ) : (
+                "Alterar senha"
+              )}
             </Button>
           </div>
         </Form>

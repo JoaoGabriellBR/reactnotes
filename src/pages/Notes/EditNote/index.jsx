@@ -14,7 +14,6 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-
 import { Editor } from "@tinymce/tinymce-react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "styles/colorProvider";
@@ -125,7 +124,7 @@ export default function EditNote() {
         onEditorChange={handleEditorChange}
         init={{
           language: "pt_BR",
-          height: 500,
+          height: "100%",
           menubar: "file edit view insert format tools table help",
           plugins: [
             "advlist",

@@ -12,7 +12,7 @@ export const Container = styled.section`
     flex-direction: row;
     justify-content: center;
   }
-  
+
   .div-title {
     padding: 0.5rem 1.4rem;
     display: flex;
@@ -41,7 +41,6 @@ export const Container = styled.section`
     height: 100vh;
   }
 `;
-
 
 export const Input = styled.input`
   background: transparent;
