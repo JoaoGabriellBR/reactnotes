@@ -12,7 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
 import ReactLoading from "react-loading";
 
-function Register() {
+export default function Register() {
   const navigate = useNavigate();
   const openLink = (link) => navigate(link);
 
@@ -147,5 +147,3 @@ function Register() {
     </>
   );
 }
-
-export default Register;

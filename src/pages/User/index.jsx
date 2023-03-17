@@ -10,16 +10,13 @@ import moment from "moment";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "styles/colorProvider";
 
-function User() {
+export default function User() {
   const [userData, setUserData] = useState();
   const [noteData, setNoteData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-
-  const openLink = (link) => {
-    navigate(link);
-  };
+  const openLink = (link) => navigate(link);
 
   const Greetings = () => {
     const now = moment();
@@ -136,5 +133,3 @@ function User() {
     </>
   );
 }
-
-export default User;

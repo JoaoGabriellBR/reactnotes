@@ -12,7 +12,7 @@ import Profile from "pages/Profile/index";
 import CreateNote from "pages/Notes/CreateNote/index";
 import EditNote from "pages/Notes/EditNote/index";
 
-const Rotas = () => {
+export default function Rotas(){
   const isAuthenticated = () => {
     return Cookies.get("reactnotes_authtoken");
   };
@@ -47,5 +47,3 @@ const Rotas = () => {
     </BrowserRouter>
   );
 };
-
-export default Rotas;

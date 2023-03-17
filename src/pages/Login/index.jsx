@@ -11,7 +11,7 @@ import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
 import ReactLoading from "react-loading";
 
-function Login() {
+export default function Login() {
   const navigate = useNavigate();
 
   const openLink = (link) => navigate(link);
@@ -27,8 +27,9 @@ function Login() {
       const response = await api.post("/login", { email, password });
       const { token } = response?.data;
       Cookies.set("reactnotes_authtoken", token);
-      openLink("/");
+      console.log("TOKEN", token);
       setLoading(false);
+      window.location.replace("/");
     } catch (e) {
       setLoading(false);
       toast.error("Usuário não encontrado", {
@@ -120,5 +121,3 @@ function Login() {
     </>
   );
 }
-
-export default Login;

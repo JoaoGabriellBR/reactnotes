@@ -10,7 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Cookies from "js-cookie";
 
-function Header() {
+export default function Header() {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -92,5 +92,3 @@ function Header() {
     </StyledHeader>
   );
 }
-
-export default Header;
