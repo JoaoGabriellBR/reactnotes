@@ -3,10 +3,11 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/88870257/226146077-8621e305-2efb-479a-a6c4-9e452347ca6c.png" alt="Logo" width="150" height="150">
   </a>
+ 
 
-  <h3 align="center">React Notes</h3>
+  <h1 align="center">React Notes</h1>
 
   <p align="center">
     Crie e organize suas ideias!
@@ -49,7 +50,6 @@
 
 
 https://user-images.githubusercontent.com/88870257/226145863-b92e367d-84e2-44be-b1af-92382df40e7f.mp4
-
 
 
 ### <h3 id="descrição">📝 Descrição</h1>
