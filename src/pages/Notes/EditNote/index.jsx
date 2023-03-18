@@ -50,7 +50,9 @@ export default function EditNote() {
 
   useEffect(() => {
     loadNoteData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
 
   const handleUpdateNote = async () => {
     setLoadingUpdate(true);
