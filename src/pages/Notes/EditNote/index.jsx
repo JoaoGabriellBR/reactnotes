@@ -31,26 +31,25 @@ export default function EditNote() {
 
   const openLink = (link) => navigate(link);
 
-  const loadNoteData = async () => {
-    setLoading(true);
-    const response = await api({
-      method: "GET",
-      url: `/note/${id}`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: Cookies.get("reactnotes_authtoken"),
-      },
-      json: true,
-    });
-
-    setNoteData(response.data);
-    setLoading(false);
-    console.log(noteData);
-  };
-
   useEffect(() => {
+    const loadNoteData = async () => {
+      setLoading(true);
+      const response = await api({
+        method: "GET",
+        url: `/note/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Cookies.get("reactnotes_authtoken"),
+        },
+        json: true,
+      });
+
+      setNoteData(response.data);
+      setLoading(false);
+    };
+
     loadNoteData();
-  }, []);
+  }, [id, noteData]);
 
   const handleUpdateNote = async () => {
     setLoadingUpdate(true);
@@ -228,16 +227,16 @@ export default function EditNote() {
                   onClick={handleUpdateNote}
                   style={{ marginRight: "15px" }}
                 >
-                {loadingUpdate ? (
-                  <ReactLoading
-                    color={"#fff"}
-                    height={24}
-                    width={24}
-                    type="spin"
-                  />
-                ) : (
-                  "Atualizar"
-                )}
+                  {loadingUpdate ? (
+                    <ReactLoading
+                      color={"#fff"}
+                      height={24}
+                      width={24}
+                      type="spin"
+                    />
+                  ) : (
+                    "Atualizar"
+                  )}
                 </Button>
               </div>
             </div>
