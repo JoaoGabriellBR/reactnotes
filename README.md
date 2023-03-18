@@ -47,8 +47,10 @@
 <!-- ABOUT THE PROJECT -->
 ## <h2 id="sobre-o-projeto">🧐 Sobre o projeto</h2>
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-VIDEO OU IMAGEM DE APRESENTAÇÃO DO PROJETO
+
+https://user-images.githubusercontent.com/88870257/226145863-b92e367d-84e2-44be-b1af-92382df40e7f.mp4
+
+
 
 ### <h3 id="descrição">📝 Descrição</h1>
 
