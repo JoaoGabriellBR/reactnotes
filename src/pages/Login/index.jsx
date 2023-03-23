@@ -80,9 +80,9 @@ export default function Login() {
                         onMouseDown={(e) => e.preventDefault()}
                       >
                         {showPassword ? (
-                          <MdOutlineVisibility />
+                          <MdOutlineVisibility size={21} />
                         ) : (
-                          <MdOutlineVisibilityOff />
+                          <MdOutlineVisibilityOff size={21} />
                         )}
                       </IconButton>
                     </InputAdornment>

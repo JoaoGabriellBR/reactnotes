@@ -96,15 +96,19 @@ export const Form = styled.form`
   }
 
   .input-form {
-    width: 80%;
+    width: 65%;
     height: 55px;
-    margin-bottom: 35px;
+    margin-bottom: 1.3rem;
+
+    @media (max-width: 1000px){
+      width: 80%;
+    }
   }
 `;
 
 export const LinkButton = styled.p`
     color: #000;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
     margin-left: 5px;
 
