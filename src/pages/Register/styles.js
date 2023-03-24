@@ -62,7 +62,7 @@ export const LeftBox = styled.div`
 `;
 
 export const RightBox = styled.div`
-  background-color: #f2f2f2;
+  background-color: #fff;
   height: 100%;
   width: 40%;
   display: flex;
@@ -96,15 +96,19 @@ export const Form = styled.form`
   }
 
   .input-form {
-    width: 100%;
+    width: 65%;
     height: 55px;
-    margin-bottom: 35px;
+    margin-bottom: 1.3rem;
+
+    @media (max-width: 1000px) {
+      width: 80%;
+    }
   }
 `;
 
 export const LinkButton = styled.p`
   color: #000;
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
   margin-left: 5px;
 

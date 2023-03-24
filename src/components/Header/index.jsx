@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { StyledHeader, DivLogo, DivIcon } from "./styles";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import IconButton from "@mui/material/IconButton";
 import Logo from "../../assets/logo.png";
 import Title from "../Title/index";
-import { useNavigate, useLocation } from "react-router-dom";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Typography from "@mui/material/Typography";
 import Cookies from "js-cookie";
+import { useNavigate, useLocation } from "react-router-dom";
+import { RxExit } from "react-icons/rx";
+import { FaUserCircle, FaStickyNote } from "react-icons/fa";
+import { StyledHeader, DivLogo, DivIcon } from "./styles";
+import { Menu, MenuItem, IconButton, Typography } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export default function Header() {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -75,17 +74,21 @@ export default function Header() {
           className="menu-item"
           onClick={() => openLink("/profile")}
         >
+          <FaUserCircle style={{ marginRight: "0.4rem" }} />
           <Typography textAlign="center">Meu perfil</Typography>
         </MenuItem>
 
         <MenuItem
           disabled={location.pathname === "/"}
+          className="menu-item"
           onClick={() => openLink("/")}
         >
+          <FaStickyNote style={{ marginRight: "0.4rem" }} />
           <Typography textAlign="center">Minhas notas</Typography>
         </MenuItem>
 
-        <MenuItem onClick={handleLogout}>
+        <MenuItem className="menu-item" onClick={handleLogout}>
+          <RxExit style={{ marginRight: "0.4rem" }} />
           <Typography textAlign="center">Sair</Typography>
         </MenuItem>
       </Menu>

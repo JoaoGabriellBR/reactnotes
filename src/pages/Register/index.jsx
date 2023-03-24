@@ -118,7 +118,7 @@ export default function Register() {
               />
               <Button
                 type="button"
-                mobile="100%"
+                mobile="80%"
                 width="50%"
                 disabled={!name || !email || !password}
                 onClick={handleCreateUser}
