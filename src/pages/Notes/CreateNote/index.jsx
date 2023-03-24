@@ -60,7 +60,7 @@ export default function CreateNote() {
       setContent(newContent);
     }
   };
-
+    
   const renderEditor = () => {
     return (
       <Editor

@@ -13,7 +13,6 @@ import ReactLoading from "react-loading";
 
 export default function Login() {
   const navigate = useNavigate();
-
   const openLink = (link) => navigate(link);
 
   const [loading, setLoading] = useState(false);
@@ -53,7 +52,7 @@ export default function Login() {
           </LeftBox>
 
           <RightBox>
-            <Form>
+            <Form onKeyDown={(e) => e.key === "Enter" && handleLogin()}>
               <Title marginBottom="35px" fontSize="40px" color="#000">
                 Acessar
               </Title>

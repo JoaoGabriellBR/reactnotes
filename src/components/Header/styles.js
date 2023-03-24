@@ -13,6 +13,13 @@ export const StyledHeader = styled.header`
   @media (max-width: 1000px) {
     padding: 0;
   }
+
+  .menu-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 export const DivLogo = styled.div`
