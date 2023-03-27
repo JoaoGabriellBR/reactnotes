@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { green, darkBlue } from "styles/colorProvider";
-import background from "../../assets/backgroundnotes.jpg";
+import background from "../../assets/background.png";
 
 export const Container = styled.section`
   overflow-x: hidden;

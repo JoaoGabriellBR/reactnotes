@@ -23,15 +23,21 @@ export default function Login() {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const response = await api.post("/login", { email, password });
+      const response = await api({
+        method: "POST",
+        url: "/login",
+        data: {
+          email: email,
+          password: password,
+        },
+      });
       const { token } = response?.data;
       Cookies.set("reactnotes_authtoken", token);
-      console.log("TOKEN", token);
       setLoading(false);
       window.location.replace("/");
     } catch (e) {
       setLoading(false);
-      toast.error("Usuário não encontrado", {
+      toast.error(e.response.data.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
       });
