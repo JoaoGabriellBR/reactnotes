@@ -113,6 +113,7 @@ export const LinkButton = styled.p`
   margin-left: 5px;
 
   &&:hover {
-    color: ${green};
+    border-bottom: 2px solid ${green};
+    transition: ease-in-out 0.1s;
   }
 `;
