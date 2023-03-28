@@ -9,6 +9,8 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
+import { HiOutlineMail } from "react-icons/hi";
+import { BiLock } from "react-icons/bi";
 import ReactLoading from "react-loading";
 
 export default function Login() {
@@ -65,19 +67,35 @@ export default function Login() {
               <TextField
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Digite o seu e-mail"
+                placeholder="E-mail"
                 className="input-form"
-                label="E-mail"
                 type="email"
+                variant="standard"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton>
+                        <HiOutlineMail />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
               <TextField
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Digite a sua senha"
+                placeholder="Senha"
                 className="input-form"
-                label="Senha"
                 type={showPassword ? "text" : "password"}
+                variant="standard"
                 InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton>
+                        <BiLock />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -99,7 +117,7 @@ export default function Login() {
                 disabled={!email || !password}
                 type="button"
                 onClick={handleLogin}
-                width="50%"
+                width="65%"
               >
                 {loading ? (
                   <ReactLoading
