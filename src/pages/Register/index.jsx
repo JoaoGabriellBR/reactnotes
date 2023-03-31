@@ -76,7 +76,7 @@ export default function Register() {
 
           <RightBox>
             <Form>
-              <Title marginBottom="35px" fontSize="40px" color="#000">
+              <Title marginBottom="35px" fontSize="2rem" color="#000">
                 Criar conta
               </Title>
               <TextField

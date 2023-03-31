@@ -61,8 +61,8 @@ export default function Login() {
 
           <RightBox>
             <Form onKeyDown={(e) => e.key === "Enter" && handleLogin()}>
-              <Title marginBottom="35px" fontSize="40px" color="#000">
-                Acessar
+              <Title marginBottom="35px" fontSize="2rem" color="#000">
+                Login
               </Title>
               <TextField
                 value={email}
@@ -117,7 +117,8 @@ export default function Login() {
                 disabled={!email || !password}
                 type="button"
                 onClick={handleLogin}
-                width="65%"
+                mobile="80%"
+                width="50%"
               >
                 {loading ? (
                   <ReactLoading

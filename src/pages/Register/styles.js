@@ -78,7 +78,12 @@ export const RightBox = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 25px;
+    margin-top: 2rem;
+
+    p {
+      color: #000;
+      font-size: 13px;
+    }
   }
 `;
 
@@ -110,10 +115,7 @@ export const LinkButton = styled.p`
   color: #000;
   text-decoration: none;
   cursor: pointer;
-  margin-left: 5px;
-
-  &&:hover {
-    border-bottom: 2px solid ${green};
-    transition: ease-in-out 0.1s;
-  }
+  margin-left: 0.3rem;
+  font-weight: 700;
+  font-size: 13px;
 `;
