@@ -107,11 +107,11 @@ export default function Profile() {
       <Header />
       <Container>
         <Form>
-          <Title marginBottom="35px" fontSize="30px" color="#000">
+          <Title marginBottom="2.1rem" fontSize="30px" color="#000">
             Meu Perfil
           </Title>
 
-          <Title marginBottom="35px" fontSize="30px" color="#000">
+          <Title marginBottom="2.1rem" fontSize="30px" color="#000">
             Dados Pessoais
           </Title>
 
