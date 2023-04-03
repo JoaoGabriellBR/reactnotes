@@ -10,6 +10,9 @@ import { toast } from "react-toastify";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
+import {AiOutlineUser} from "react-icons/ai";
+import { HiOutlineMail } from "react-icons/hi";
+import { BiLock } from "react-icons/bi";
 import ReactLoading from "react-loading";
 
 export default function Register() {
@@ -73,33 +76,58 @@ export default function Register() {
 
           <RightBox>
             <Form>
-              <Title marginBottom="35px" fontSize="40px" color="#000">
+              <Title marginBottom="35px" fontSize="2rem" color="#000">
                 Criar conta
               </Title>
               <TextField
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Digite o seu nome"
+                placeholder="Nome"
                 className="input-form"
-                label="Nome"
                 type="text"
+                variant="standard"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton>
+                        <AiOutlineUser />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
               <TextField
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Digite o seu e-mail"
+                placeholder="E-mail"
                 className="input-form"
-                label="E-mail"
                 type="email"
+                variant="standard"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton>
+                        <HiOutlineMail />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
               <TextField
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Digite a sua senha"
+                placeholder="Senha"
                 className="input-form"
-                label="Senha"
                 type={showPassword ? "text" : "password"}
+                variant="standard"
                 InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton>
+                        <BiLock />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -107,9 +135,9 @@ export default function Register() {
                         onMouseDown={(e) => e.preventDefault()}
                       >
                         {showPassword ? (
-                          <MdOutlineVisibility />
+                          <MdOutlineVisibility size={21}/>
                         ) : (
-                          <MdOutlineVisibilityOff />
+                          <MdOutlineVisibilityOff size={21}/>
                         )}
                       </IconButton>
                     </InputAdornment>

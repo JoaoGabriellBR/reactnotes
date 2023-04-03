@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { green, darkBlue } from "styles/colorProvider";
-import background from "../../assets/backgroundnotes.jpg";
+import background from "../../assets/background.png";
 
 export const Container = styled.section`
   overflow-x: hidden;
@@ -78,7 +78,12 @@ export const RightBox = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 25px;
+    margin-top: 2rem;
+
+    p {
+      color: #000;
+      font-size: 13px;
+    }
   }
 `;
 
@@ -110,9 +115,7 @@ export const LinkButton = styled.p`
   color: #000;
   text-decoration: none;
   cursor: pointer;
-  margin-left: 5px;
-
-  &&:hover {
-    color: ${green};
-  }
+  margin-left: 0.3rem;
+  font-weight: 700;
+  font-size: 13px;
 `;

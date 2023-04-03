@@ -9,6 +9,8 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
+import { HiOutlineMail } from "react-icons/hi";
+import { BiLock } from "react-icons/bi";
 import ReactLoading from "react-loading";
 
 export default function Login() {
@@ -23,15 +25,21 @@ export default function Login() {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const response = await api.post("/login", { email, password });
+      const response = await api({
+        method: "POST",
+        url: "/login",
+        data: {
+          email: email,
+          password: password,
+        },
+      });
       const { token } = response?.data;
       Cookies.set("reactnotes_authtoken", token);
-      console.log("TOKEN", token);
       setLoading(false);
       window.location.replace("/");
     } catch (e) {
       setLoading(false);
-      toast.error("Usuário não encontrado", {
+      toast.error(e.response.data.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
       });
@@ -53,25 +61,41 @@ export default function Login() {
 
           <RightBox>
             <Form onKeyDown={(e) => e.key === "Enter" && handleLogin()}>
-              <Title marginBottom="35px" fontSize="40px" color="#000">
-                Acessar
+              <Title marginBottom="35px" fontSize="2rem" color="#000">
+                Login
               </Title>
               <TextField
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Digite o seu e-mail"
+                placeholder="E-mail"
                 className="input-form"
-                label="E-mail"
                 type="email"
+                variant="standard"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton>
+                        <HiOutlineMail />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
               <TextField
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Digite a sua senha"
+                placeholder="Senha"
                 className="input-form"
-                label="Senha"
                 type={showPassword ? "text" : "password"}
+                variant="standard"
                 InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton>
+                        <BiLock />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -93,6 +117,7 @@ export default function Login() {
                 disabled={!email || !password}
                 type="button"
                 onClick={handleLogin}
+                mobile="80%"
                 width="50%"
               >
                 {loading ? (
