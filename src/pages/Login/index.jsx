@@ -61,7 +61,7 @@ export default function Login() {
 
           <RightBox>
             <Form onKeyDown={(e) => e.key === "Enter" && handleLogin()}>
-              <Title marginBottom="35px" fontSize="2rem" color="#000">
+              <Title marginBottom="2.1rem" fontSize="2rem" color="#000">
                 Login
               </Title>
               <TextField
