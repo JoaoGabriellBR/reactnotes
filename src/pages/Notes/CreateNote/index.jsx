@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { Input } from "./styles";
-import { MdModeEdit } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "styles/colorProvider";
 import ReactLoading from "react-loading";
@@ -72,7 +72,7 @@ export default function CreateNote() {
         init={{
           language: "pt_BR",
           height: "100%",
-          menubar: "file edit view insert format tools table help",
+          menubar: "file edit view insert format tools table",
           plugins: [
             "advlist",
             "autolink",
@@ -114,7 +114,7 @@ export default function CreateNote() {
           <>
             <div className="div-title">
               <div className="title">
-                <MdModeEdit />
+                <CiEdit style={{ width: "1.3rem", height: "1.3rem" }}/>
                 <Input
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}

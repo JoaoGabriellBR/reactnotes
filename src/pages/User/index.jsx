@@ -212,7 +212,6 @@ export default function User() {
                           onClick={() => {
                             setShowDeleteNote(true);
                             setNoteId(note.id);
-                            console.log(note.id);
                           }}
                           style={{ scale: "1.5", cursor: "pointer" }}
                         />

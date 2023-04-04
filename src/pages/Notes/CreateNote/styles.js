@@ -46,7 +46,8 @@ export const Container = styled.section`
 
 export const Input = styled.input`
   background: transparent;
-  font-size: 25px;
+  font-size: 1.3rem;
   border: none;
   outline: 0;
+  margin-left: 0.3rem;
 `;

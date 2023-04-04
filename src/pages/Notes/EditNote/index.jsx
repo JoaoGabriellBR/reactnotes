@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Container, Input } from "./styles";
 import Header from "components/Header/index";
 import Button from "components/Button/index";
-import { MdModeEdit } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import api from "api/index";
@@ -132,7 +132,7 @@ export default function EditNote() {
           <>
             <div className="div-title">
               <div className="title">
-                <MdModeEdit />
+                <CiEdit style={{ width: "1.3rem", height: "1.3rem" }}/>
                 <Input
                   value={noteData?.title}
                   onChange={(e) =>
