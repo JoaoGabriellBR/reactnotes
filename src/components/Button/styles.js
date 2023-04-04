@@ -23,7 +23,6 @@ export const StyledButton = styled.button`
 
   &&:hover {
     color: ${black};
-    background: ${(props) => (props.outlined ? green : green)};
     transition: 0.2s ease-in-out;
     opacity: 0.8;
   }
