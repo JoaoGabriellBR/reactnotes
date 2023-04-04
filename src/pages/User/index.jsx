@@ -6,7 +6,6 @@ import { Container, GridContainer, Widget } from "./styles";
 import Cookies from "js-cookie";
 import api from "../../api/index";
 import { useNavigate } from "react-router-dom";
-import createNote from "../../assets/createnote.png";
 import ReactLoading from "react-loading";
 import moment from "moment";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -24,6 +23,7 @@ import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 export default function User() {
   const [userData, setUserData] = useState();
   const [noteData, setNoteData] = useState([]);
+  const [noteId, setNoteId] = useState();
   const [loading, setLoading] = useState(false);
   const [loadingDeleteNote, setLoadingDeleteNote] = useState(false);
   const [showDeleteNote, setShowDeleteNote] = useState(false);
@@ -128,7 +128,7 @@ export default function User() {
     );
   };
 
-  const handleDeleteNote = async (noteId) => {
+  const handleDeleteNote = async () => {
     setLoadingDeleteNote(true);
     try {
       await api({
@@ -140,7 +140,8 @@ export default function User() {
         },
       });
       setLoadingDeleteNote(false);
-      loadNoteData();
+      setShowDeleteNote(false);
+      setNoteData(noteData?.filter((note) => note.id !== noteId));
       toast.success("Nota excluída com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
@@ -201,15 +202,19 @@ export default function User() {
                       <div>
                         <AiOutlineEdit
                           style={{
-                            scale: "1.3",
+                            scale: "1.5",
                             cursor: "pointer",
                             marginRight: 25,
                           }}
                           onClick={() => openLink(`/editnote/${note.id}`)}
                         />
                         <AiOutlineDelete
-                          onClick={() => setShowDeleteNote(true)}
-                          style={{ scale: "1.3", cursor: "pointer" }}
+                          onClick={() => {
+                            setShowDeleteNote(true);
+                            setNoteId(note.id);
+                            console.log(note.id);
+                          }}
+                          style={{ scale: "1.5", cursor: "pointer" }}
                         />
                       </div>
                     </Widget>

@@ -11,6 +11,7 @@ import { Input } from "./styles";
 import { MdModeEdit } from "react-icons/md";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "styles/colorProvider";
+import ReactLoading from "react-loading";
 
 export default function CreateNote() {
   const editorRef = useRef(null);
@@ -19,11 +20,12 @@ export default function CreateNote() {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [loading, setLoading] = useState(false);
+  const [loadingCreate, setLoadingCreate] = useState(false);
 
   const openLink = (link) => navigate(link);
 
   const handleCreateNote = async () => {
-    setLoading(true);
+    setLoadingCreate(true);
     try {
       await api({
         method: "POST",
@@ -37,15 +39,15 @@ export default function CreateNote() {
           content: content,
         },
       });
+      setLoadingCreate(false);
       openLink("/");
       toast.success("Nota criada com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
         autoClose: 2000,
       });
-      setLoading(false);
     } catch (e) {
-      console.log(e.message);
+      setLoadingCreate(false);
       toast.error(e?.response?.data?.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
@@ -60,7 +62,7 @@ export default function CreateNote() {
       setContent(newContent);
     }
   };
-    
+
   const renderEditor = () => {
     return (
       <Editor
@@ -105,7 +107,9 @@ export default function CreateNote() {
       <Header />
       <Container>
         {loading ? (
-          <CircularProgress sx={{ color: green }} />
+          <div className="div-loading">
+            <CircularProgress sx={{ color: green, margin: "3rem" }} />
+          </div>
         ) : (
           <>
             <div className="div-title">
@@ -123,7 +127,16 @@ export default function CreateNote() {
                 onClick={handleCreateNote}
                 mobile="30%"
               >
-                Salvar
+                {loadingCreate ? (
+                  <ReactLoading
+                    color={"#fff"}
+                    height={24}
+                    width={24}
+                    type="spin"
+                  />
+                ) : (
+                  "Confirmar"
+                )}
               </Button>
             </div>
 
