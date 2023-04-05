@@ -62,11 +62,11 @@ export const Widget = styled.div`
   width: 35rem;
   min-height: 50px;
   border-radius: 10px;
-  background-color: lightergray;
+  background-color: ${white};
   color: ${white};
   margin: 1rem 0 1rem 0;
   padding: 1.2rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
   color: #000;
   transition: all ease-in-out 0.3s;
   
