@@ -44,6 +44,10 @@ export const Container = styled.section`
       justify-content: flex-start;
       align-items: flex-start;
       flex-wrap: wrap;
+
+      @media (max-width: 1000px){
+        justify-content: center;
+      }
     }
 
     .title-name {
@@ -74,10 +78,9 @@ export const Widget = styled.div`
   @media (max-width: 900px) {
     margin-bottom: 0.5rem;
     box-sizing: border-box;
-    margin: 0;
+    margin-top: 1rem;
     width: 80%;
     min-height: 150px;
-    scale: 80%;
   }
 
   .widget-left {
