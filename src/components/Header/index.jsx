@@ -4,7 +4,8 @@ import Title from "../Title/index";
 import Cookies from "js-cookie";
 import { useNavigate, useLocation } from "react-router-dom";
 import { RxExit } from "react-icons/rx";
-import { FaUserCircle, FaStickyNote } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
+import { GrDocumentNotes } from "react-icons/gr";
 import { StyledHeader, DivLogo, DivIcon } from "./styles";
 import { Menu, MenuItem, IconButton, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -83,7 +84,7 @@ export default function Header() {
           className="menu-item"
           onClick={() => openLink("/")}
         >
-          <FaStickyNote style={{ marginRight: "0.4rem" }} />
+          <GrDocumentNotes style={{ marginRight: "0.4rem" }} />
           <Typography textAlign="center">Minhas notas</Typography>
         </MenuItem>
 

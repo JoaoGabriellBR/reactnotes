@@ -1,19 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useParams } from "react-router-dom";
 import { Container, Input } from "./styles";
 import Header from "components/Header/index";
 import Button from "components/Button/index";
-import { useParams, useNavigate } from "react-router-dom";
-import { MdModeEdit } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import api from "api/index";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-} from "@mui/material";
 import { Editor } from "@tinymce/tinymce-react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "styles/colorProvider";
@@ -21,15 +14,11 @@ import ReactLoading from "react-loading";
 
 export default function EditNote() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const editorRef = useRef(null);
 
   const [noteData, setNoteData] = useState([]);
-  const [showDeleteNote, setShowDeleteNote] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
-
-  const openLink = (link) => navigate(link);
 
   const loadNoteData = async () => {
     setLoading(true);
@@ -52,7 +41,6 @@ export default function EditNote() {
     loadNoteData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
 
   const handleUpdateNote = async () => {
     setLoadingUpdate(true);
@@ -77,31 +65,6 @@ export default function EditNote() {
       });
     } catch (e) {
       setLoadingUpdate(false);
-      toast.error(e?.response?.data?.error, {
-        position: toast.POSITION.TOP_RIGHT,
-        theme: "colored",
-        autoClose: 2000,
-      });
-    }
-  };
-
-  const handleDeleteNote = async () => {
-    try {
-      await api({
-        method: "DELETE",
-        url: `/note/${id}`,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: Cookies.get("reactnotes_authtoken"),
-        },
-      });
-      openLink("/");
-      toast.success("Nota excluída com sucesso!", {
-        position: toast.POSITION.TOP_RIGHT,
-        theme: "colored",
-        autoClose: 2000,
-      });
-    } catch (e) {
       toast.error(e?.response?.data?.error, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
@@ -157,44 +120,8 @@ export default function EditNote() {
     );
   };
 
-  const renderDeleteNote = () => {
-    return (
-      <Dialog
-        onClose={() => setShowDeleteNote(false)}
-        fullWidth
-        open={showDeleteNote}
-      >
-        <DialogTitle>Excluir Nota</DialogTitle>
-
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Você tem certeza que deseja excluir esta nota?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            disabled={!noteData?.title || !noteData?.content}
-            onClick={() => setShowDeleteNote(false)}
-            style={{ scale: "90%" }}
-            outlined
-          >
-            Cancelar
-          </Button>
-
-          <Button
-            onClick={handleDeleteNote}
-            style={{ marginLeft: "5px", scale: "90%" }}
-          >
-            Excluir
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  };
-
   return (
     <>
-      {renderDeleteNote()}
       <Header />
       <Container>
         {loading ? (
@@ -205,8 +132,9 @@ export default function EditNote() {
           <>
             <div className="div-title">
               <div className="title">
-                <MdModeEdit />
+                <CiEdit style={{ width: "1.3rem", height: "1.3rem" }}/>
                 <Input
+                  maxLength={30}
                   value={noteData?.title}
                   onChange={(e) =>
                     setNoteData({ ...noteData, title: e.target.value })
@@ -217,14 +145,6 @@ export default function EditNote() {
               </div>
 
               <div className="div-buttons">
-                <Button
-                  onClick={() => setShowDeleteNote(true)}
-                  style={{ marginRight: "15px" }}
-                  outlined
-                >
-                  Excluir
-                </Button>
-
                 <Button
                   disabled={!noteData?.title || !noteData?.content}
                   onClick={handleUpdateNote}

@@ -9,7 +9,7 @@ export const StyledButton = styled.button`
   background: ${(props) => (props.outlined ? "transparent" : green)};
   color: ${black};
   border: ${(props) => (props.outlined ? `2px solid ${green}` : "none")};
-  border-radius: 8px;
+  border-radius: 2rem;
   width: ${(props) => props.width || "100px"};
   min-height: ${(props) => props.height || "40px"};
   margin-right: ${(props) => props.marginRight};
@@ -23,7 +23,6 @@ export const StyledButton = styled.button`
 
   &&:hover {
     color: ${black};
-    background: ${(props) => (props.outlined ? green : green)};
     transition: 0.2s ease-in-out;
     opacity: 0.8;
   }

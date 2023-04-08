@@ -15,6 +15,15 @@ export const Container = styled.section`
   grid-area: container;
   background-color: #fff;
 
+  .div-loading {
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
   .div-title {
     padding: 0.5rem 1.4rem;
     display: flex;
@@ -22,7 +31,7 @@ export const Container = styled.section`
     justify-content: space-between;
     align-items: center;
 
-    .title{
+    .title {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -37,7 +46,8 @@ export const Container = styled.section`
 
 export const Input = styled.input`
   background: transparent;
-  font-size: 25px;
+  font-size: 1.3rem;
   border: none;
   outline: 0;
+  margin-left: 0.3rem;
 `;
