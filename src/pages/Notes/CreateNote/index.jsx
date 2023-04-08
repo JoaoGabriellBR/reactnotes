@@ -116,6 +116,7 @@ export default function CreateNote() {
               <div className="title">
                 <CiEdit style={{ width: "1.3rem", height: "1.3rem" }}/>
                 <Input
+                  maxLength={30}
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   type="text"

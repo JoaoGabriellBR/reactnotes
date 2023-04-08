@@ -40,9 +40,10 @@ export const Container = styled.section`
     .div-main{
       width: 100%;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: flex-start;
       align-items: flex-start;
+      flex-wrap: wrap;
     }
 
     .title-name {
@@ -56,15 +57,15 @@ export const Container = styled.section`
 
 export const Widget = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  width: 35rem;
-  min-height: 50px;
-  border-radius: 10px;
+  align-items: flex-start;
+  width: 8rem;
+  min-height: 200px;
+  border-radius: 1rem;
   background-color: ${white};
   color: ${white};
-  margin: 1rem 0 1rem 0;
+  margin: 1rem 1rem 1rem 0;
   padding: 1.2rem;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
   color: #000;
@@ -90,6 +91,7 @@ export const Widget = styled.div`
       font-size: 1.2rem;
       margin: 0;
       padding: 0;
+      word-break: break-all;
     }
 
     .created_at {

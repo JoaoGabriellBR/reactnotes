@@ -27,6 +27,7 @@ export default function User() {
   const [loading, setLoading] = useState(false);
   const [loadingDeleteNote, setLoadingDeleteNote] = useState(false);
   const [showDeleteNote, setShowDeleteNote] = useState(false);
+  const [showIcons, setShowIcons] = useState(null);
 
   const navigate = useNavigate();
   const openLink = (link) => navigate(link);
@@ -191,7 +192,11 @@ export default function User() {
                   <p>Nenhuma nota encontrada</p>
                 ) : (
                   noteData?.map((note) => (
-                    <Widget>
+                    <Widget
+                      id={note.id}
+                      onMouseEnter={() => setShowIcons(note.id)}
+                      onMouseLeave={() => setShowIcons(null)}
+                    >
                       <div className="widget-left">
                         <h1 className="title">{note.title.toUpperCase()}</h1>
                         <p className="created_at">
@@ -199,23 +204,25 @@ export default function User() {
                         </p>
                       </div>
 
-                      <div>
-                        <AiOutlineEdit
-                          style={{
-                            scale: "1.5",
-                            cursor: "pointer",
-                            marginRight: 25,
-                          }}
-                          onClick={() => openLink(`/editnote/${note.id}`)}
-                        />
-                        <AiOutlineDelete
-                          onClick={() => {
-                            setShowDeleteNote(true);
-                            setNoteId(note.id);
-                          }}
-                          style={{ scale: "1.5", cursor: "pointer" }}
-                        />
-                      </div>
+                      {showIcons === note.id && (
+                        <div>
+                          <AiOutlineEdit
+                            style={{
+                              scale: "1.5",
+                              cursor: "pointer",
+                              marginRight: 25,
+                            }}
+                            onClick={() => openLink(`/editnote/${note.id}`)}
+                          />
+                          <AiOutlineDelete
+                            onClick={() => {
+                              setShowDeleteNote(true);
+                              setNoteId(note.id);
+                            }}
+                            style={{ scale: "1.5", cursor: "pointer" }}
+                          />
+                        </div>
+                      )}
                     </Widget>
                   ))
                 )}
