@@ -78,15 +78,12 @@ No geral, o React Notes é uma ferramenta web altamente versátil e poderosa que
      <a href="https://www.prisma.io">
      <img align="center" alt="Prisma" height="30" width="40" src="https://cdn.worldvectorlogo.com/logos/prisma-3.svg"/>
      </a>
-      <a href="https://graphql.org">
-      <img align="center" alt="GraphQl" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/graphql/graphql-plain.svg">
-      </a>
-      <a href="https://expressjs.com/">
-     <img align="center" alt="Expressjs" height="30" width="40" src="https://icongr.am/devicon/express-original.svg?size=128&color=currentColor"/>
-      </a>
-        <a href="https://www.mysql.com">
+     <a href="https://www.mysql.com">
       <img align="center" alt="MySQL" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-plain.svg">
-        </a>
+     </a>
+     <a href="https://expressjs.com/">
+      <img align="center" alt="Expressjs" height="30" width="40" src="https://icongr.am/devicon/express-original.svg?size=128&color=currentColor"/>
+     </a>
   </div> <br> <br>
 
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
