@@ -72,17 +72,23 @@ No geral, o React Notes é uma ferramenta web altamente versátil e poderosa que
     <a href="https://reactjs.org">
     <img align="center" alt="React" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg">
     </a>
+    <a href="https://styled-components.com">
+    <img align="center" alt="Styled Components" height="30" width="40" src="https://www.daggala.com/static/228867c3668e439101821568a8a03b54/19ca5/sc.png">
+    </a>
     <a href="https://nodejs.org">
      <img align="center" alt="Nodejs" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-plain.svg"/>
     </a>
+     <a href="https://expressjs.com/">
+      <img align="center" alt="Expressjs" height="30" width="40" src="https://icongr.am/devicon/express-original.svg?size=128&color=currentColor"/>
+     </a>
      <a href="https://www.prisma.io">
      <img align="center" alt="Prisma" height="30" width="40" src="https://cdn.worldvectorlogo.com/logos/prisma-3.svg"/>
      </a>
+     <a href="https://jwt.io">
+     <img align="center" alt="JWT" height="30" width="40" src="https://vegibit.com/wp-content/uploads/2018/07/JSON-Web-Token-Authentication-With-Node.png"/>
+     </a>
      <a href="https://www.mysql.com">
       <img align="center" alt="MySQL" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-plain.svg">
-     </a>
-     <a href="https://expressjs.com/">
-      <img align="center" alt="Expressjs" height="30" width="40" src="https://icongr.am/devicon/express-original.svg?size=128&color=currentColor"/>
      </a>
   </div> <br> <br>
 
