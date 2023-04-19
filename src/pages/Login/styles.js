@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { green, darkBlue } from "styles/colorProvider";
+import { darkBlue } from "styles/colorProvider";
 import background from "../../assets/background.png";
 
 export const Container = styled.section`
