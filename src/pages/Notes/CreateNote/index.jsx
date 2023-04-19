@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars*/
 import React, { useState, useRef } from "react";
 import Header from "components/Header/index";
 import Button from "components/Button/index";
