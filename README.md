@@ -48,10 +48,6 @@
 <!-- ABOUT THE PROJECT -->
 ## <h2 id="sobre-o-projeto">🧐 Sobre o projeto</h2>
 
-
-https://user-images.githubusercontent.com/88870257/226145863-b92e367d-84e2-44be-b1af-92382df40e7f.mp4
-
-
 ### <h3 id="descrição">📝 Descrição</h1>
 
 <hr>
@@ -60,6 +56,16 @@ O React Notes é uma plataforma web altamente versátil que permite aos usuário
 No geral, o React Notes é uma ferramenta web altamente versátil e poderosa que oferece uma ampla gama de recursos para ajudar a simplificar sua vida e aumentar sua produtividade.
 
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
+
+
+## Layout mobile
+![Mobile 1](https://github.com/acenelio/assets/raw/main/sds1/mobile1.png) ![Mobile 2](https://github.com/acenelio/assets/raw/main/sds1/mobile2.png)
+
+## Layout web
+![Web 1](https://github.com/acenelio/assets/raw/main/sds1/web1.png)
+
+![Web 2](https://github.com/acenelio/assets/raw/main/sds1/web2.png)
+
 
 ### <h3 id="tecnologias-utilizadas">⚙️ Tecnologias utilizadas</h3>
 
