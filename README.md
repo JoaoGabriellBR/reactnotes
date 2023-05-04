@@ -58,7 +58,7 @@ No geral, o React Notes é uma ferramenta web altamente versátil e poderosa que
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
 
 ## Layout mobile
-![Mobile 1](https://user-images.githubusercontent.com/88870257/236104147-62456937-52c8-49d7-8f9f-82974a0599b3.png) ![Mobile 2](https://user-images.githubusercontent.com/88870257/236104149-58cc92d1-e4b7-48db-b2e7-90eb113874d8.png)
+![Mobile 1](https://user-images.githubusercontent.com/88870257/236105136-9eb89549-d469-4dab-9279-602691fdbd62.png)
 
 ## Layout web
 ![Web 1](https://user-images.githubusercontent.com/88870257/236104145-6dc08182-9f2f-4a5b-aa7e-a1cfd5a7eb0f.png)
