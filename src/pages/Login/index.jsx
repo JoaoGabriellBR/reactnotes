@@ -36,7 +36,7 @@ export default function Login() {
       const { token } = response?.data;
       Cookies.set("reactnotes_authtoken", token);
       setLoading(false);
-      window.location.replace("/");
+      window.location.href = "/";
     } catch (e) {
       setLoading(false);
       toast.error(e.response.data.error, {
