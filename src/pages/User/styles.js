@@ -37,6 +37,17 @@ export const Container = styled.section`
       }
     }
 
+    .div-search {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      @media (max-width: 1000px) {
+        flex-direction: column;
+      }
+    }
+
     .div-main{
       width: 100%;
       display: flex;
