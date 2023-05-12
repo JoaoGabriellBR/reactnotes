@@ -19,15 +19,20 @@ import {
   DialogActions,
 } from "@mui/material";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { InputBase, IconButton, Paper } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function User() {
   const [userData, setUserData] = useState();
   const [noteData, setNoteData] = useState([]);
   const [noteId, setNoteId] = useState();
+  const [totalCount, setTotalCount] = useState();
   const [loading, setLoading] = useState(false);
   const [loadingDeleteNote, setLoadingDeleteNote] = useState(false);
   const [showDeleteNote, setShowDeleteNote] = useState(false);
   const [showIcons, setShowIcons] = useState(null);
+
+  const [search, setSearch] = useState();
 
   const navigate = useNavigate();
   const openLink = (link) => navigate(link);
@@ -60,12 +65,14 @@ export default function User() {
       headers: {
         "Content-Type": "application/json",
         Authorization: Cookies.get("reactnotes_authtoken"),
+        search,
       },
       json: true,
     });
 
-    setNoteData(response.data.response);
     setLoading(false);
+    setNoteData(response.data.response);
+    setTotalCount(response.data.totalCount);
   };
 
   const loadUserData = async () => {
@@ -89,7 +96,24 @@ export default function User() {
 
   useEffect(() => {
     loadNoteData();
+    // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    let timeoutId;
+    if (search === "") {
+      timeoutId = setTimeout(() => {
+        loadNoteData();
+      }, 2000);
+    }
+    
+    return () => {
+      clearTimeout(timeoutId);
+    };
+    // eslint-disable-next-line
+  }, [search]);
+  
+  
 
   const renderDeleteNote = () => {
     return (
@@ -143,6 +167,7 @@ export default function User() {
       setLoadingDeleteNote(false);
       setShowDeleteNote(false);
       setNoteData(noteData?.filter((note) => note.id !== noteId));
+      setTotalCount((prevTotalCount) => prevTotalCount - 1);
       toast.success("Nota excluída com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
@@ -178,17 +203,48 @@ export default function User() {
                   {Greetings()}, {userData?.name.split(" ")[0]}!
                 </Title>
 
-                <Button
-                  onClick={() => openLink("/createnote")}
-                  width="10rem"
-                  mobile="30%"
-                >
-                  + Nova nota
-                </Button>
+                <div className="div-search">
+                  <Button
+                    onClick={() => openLink("/createnote")}
+                    width="8rem"
+                    mobile="50%"
+                  >
+                    Nova nota +
+                  </Button>
+
+                  <Paper
+                    component="form"
+                    sx={{
+                      p: "2px 15px",
+                      display: "flex",
+                      alignItems: "center",
+                      width: 250,
+                      borderRadius: "2rem",
+                      marginLeft: 2
+                    }}
+                  >
+                    <InputBase
+                      sx={{ ml: 1, flex: 1 }}
+                      placeholder="Pesquisar notas"
+                      inputProps={{ "aria-label": "search google maps" }}
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && loadNoteData()}
+                    />
+                    <IconButton
+                      type="button"
+                      sx={{ p: "10px" }}
+                      aria-label="search"
+                      onClick={() => loadNoteData()}
+                    >
+                      <SearchIcon />
+                    </IconButton>
+                  </Paper>
+                </div>
               </div>
 
               <div className="div-main">
-                {!noteData.length ? (
+                {!noteData.length ? ( 
                   <p>Nenhuma nota encontrada</p>
                 ) : (
                   noteData?.map((note) => (
@@ -227,6 +283,9 @@ export default function User() {
                   ))
                 )}
               </div>
+              <p style={{ position: "fixed", bottom: 30 }}>
+                Mostrando {noteData?.length} de {totalCount}
+              </p>
             </>
           )}
         </Container>
