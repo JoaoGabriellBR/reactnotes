@@ -34,6 +34,7 @@ export const StyledButton = styled.button`
 
   @media (max-width: 1000px) {
     width: ${(props) => props.mobile || "80%"};
+    margin: ${(props) => props.marginMobile || "0"};
     transition: all ease-in-out 0.3s;
   }
 `;

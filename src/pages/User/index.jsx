@@ -208,6 +208,7 @@ export default function User() {
                     onClick={() => openLink("/createnote")}
                     width="8rem"
                     mobile="50%"
+                    marginMobile="1rem"
                   >
                     Nova nota +
                   </Button>
@@ -225,7 +226,7 @@ export default function User() {
                   >
                     <InputBase
                       sx={{ ml: 1, flex: 1 }}
-                      placeholder="Pesquisar notas"
+                      placeholder="Buscar..."
                       inputProps={{ "aria-label": "search google maps" }}
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
