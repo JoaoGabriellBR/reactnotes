@@ -19,6 +19,7 @@ import {
   DialogActions,
 } from "@mui/material";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { GrAdd } from "react-icons/gr";
 import { InputBase, IconButton, Paper } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -210,7 +211,8 @@ export default function User() {
                     mobile="50%"
                     marginMobile="1rem"
                   >
-                    Nova nota +
+                    <GrAdd style={{ width: "1rem", marginRight: "0.4rem" }} />
+                    Nova nota
                   </Button>
 
                   <Paper
@@ -221,7 +223,7 @@ export default function User() {
                       alignItems: "center",
                       width: 250,
                       borderRadius: "2rem",
-                      marginLeft: 2
+                      marginLeft: 2,
                     }}
                   >
                     <InputBase
@@ -245,7 +247,7 @@ export default function User() {
               </div>
 
               <div className="div-main">
-                {!noteData.length ? ( 
+                {!noteData.length ? (
                   <p>Nenhuma nota encontrada</p>
                 ) : (
                   noteData?.map((note) => (
@@ -284,7 +286,7 @@ export default function User() {
                   ))
                 )}
               </div>
-              <p style={{ position: "fixed", bottom: 30 }}>
+              <p className="total-count">
                 Mostrando {noteData?.length} de {totalCount}
               </p>
             </>

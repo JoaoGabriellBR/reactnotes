@@ -68,6 +68,17 @@ export const Container = styled.section`
       align-self: center;
     }
   }
+
+  .total-count {
+    position: fixed;
+    bottom: 15px;
+
+    @media (max-width: 1000px) {
+      margin-top: 30px;
+      position: relative;
+      bottom: 0;
+    }
+  }
 `;
 
 export const Widget = styled.div`
@@ -109,7 +120,7 @@ export const Widget = styled.div`
     }
 
     .created_at {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       margin: 0;
       padding: 0;
     }
