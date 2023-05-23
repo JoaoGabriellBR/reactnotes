@@ -13,61 +13,72 @@ export const GridContainer = styled.div`
 `;
 
 export const Container = styled.section`
-    grid-area: container;
-    background-color: #f2f2f2;
-    padding: 3rem 5rem 1rem 5rem;
+  grid-area: container;
+  background-color: #f2f2f2;
+  padding: 3rem 5rem 1rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 1000px) {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .div-greetings {
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 
     @media (max-width: 1000px) {
-        padding-right: 0px;
-        padding-left: 0px;
+      flex-direction: column;
     }
+  }
 
-    .div-greetings{
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+  .div-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
-      @media (max-width: 1000px){
-        flex-direction: column;
-      }
+    @media (max-width: 1000px) {
+      flex-direction: column;
     }
+  }
 
-    .div-search {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+  .div-main {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
 
-      @media (max-width: 1000px) {
-        flex-direction: column;
-      }
+    @media (max-width: 1000px) {
+      justify-content: center;
     }
+  }
 
-    .div-main{
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-wrap: wrap;
+  .title-name {
+    align-self: flex-start;
 
-      @media (max-width: 1000px){
-        justify-content: center;
-      }
+    @media (max-width: 1000px) {
+      align-self: center;
     }
+  }
 
-    .title-name {
-      align-self: flex-start;
+  .total-count {
+    position: fixed;
+    bottom: 15px;
 
-        @media (max-width: 1000px) {
-          align-self: center;
-        }
+    @media (max-width: 1000px) {
+      margin-top: 30px;
+      position: relative;
+      bottom: 0;
     }
+  }
 `;
 
 export const Widget = styled.div`
@@ -109,7 +120,7 @@ export const Widget = styled.div`
     }
 
     .created_at {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       margin: 0;
       padding: 0;
     }
