@@ -50,7 +50,7 @@ export default function Register() {
         theme: "colored",
         autoClose: 2000,
       });
-      navigate("/login");
+      openLink("/login");
     } catch (e) {
       setLoading(false);
       toast.error(e?.response?.data?.error, {

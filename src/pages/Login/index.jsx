@@ -36,10 +36,11 @@ export default function Login() {
       const { token } = response?.data;
       Cookies.set("reactnotes_authtoken", token);
       setLoading(false);
-      window.location.href = "/";
+      openLink("/");
     } catch (e) {
       setLoading(false);
-      toast.error(e.response.data.error, {
+      const errorMessage = "Não foi possível realizar o login."
+      toast.error(errorMessage, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
       });

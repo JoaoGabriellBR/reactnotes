@@ -73,7 +73,7 @@ export default function CreateNote() {
         init={{
           language: "pt_BR",
           height: "100%",
-          menubar: "file edit view insert format tools table",
+          menubar: false,
           plugins: [
             "advlist",
             "autolink",
@@ -95,7 +95,7 @@ export default function CreateNote() {
             "wordcount",
           ],
           toolbar:
-            "undo redo | bold italic underline strikethrough fullscreen | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl",
+            "undo redo | bold italic underline strikethrough fullscreen | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save | insertfile image media template link anchor codesample | ltr rtl",
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}

@@ -1,6 +1,6 @@
 import React from "react";
-import Cookies from "js-cookie";
-import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import AuthenticatedRoute from "./authenticatedRoute";
 
 // USER
 import Register from "pages/Register/index";
@@ -13,10 +13,6 @@ import CreateNote from "pages/Notes/CreateNote/index";
 import EditNote from "pages/Notes/EditNote/index";
 
 export default function Rotas() {
-  const isAuthenticated = () => {
-    return Cookies.get("reactnotes_authtoken");
-  };
-
   return (
     <BrowserRouter>
       <Routes>
@@ -24,24 +20,22 @@ export default function Rotas() {
         <Route exact path="/login" element={<Login />}></Route>
         <Route
           path="/"
-          element={isAuthenticated() ? <User /> : <Navigate to="/login" />}
+          element={<AuthenticatedRoute component={User} />}
         ></Route>
         <Route
           exact
           path="/createnote"
-          element={
-            isAuthenticated() ? <CreateNote /> : <Navigate to="/login" />
-          }
+          element={<AuthenticatedRoute component={CreateNote} />}
         ></Route>
         <Route
           exact
           path="/editnote/:id"
-          element={isAuthenticated() ? <EditNote /> : <Navigate to="/login" />}
+          element={<AuthenticatedRoute component={EditNote} />}
         ></Route>
         <Route
           exact
           path="/profile"
-          element={isAuthenticated() ? <Profile /> : <Navigate to="/login" />}
+          element={<AuthenticatedRoute component={Profile} />}
         ></Route>
       </Routes>
     </BrowserRouter>
