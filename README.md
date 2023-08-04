@@ -51,7 +51,7 @@
 ### <h3 id="descrição">📝 Descrição</h1>
 
 <hr>
-React Notes é uma ferramenta web altamente versátil e poderosa que oferece uma ampla gama de recursos para ajudar a simplificar sua vida e aumentar sua produtividade, permitindo a criação de notas e páginas complexas com recursos avançados de edição de texto.
+React Notes é uma ferramenta web versátil que oferece uma gama de recursos para ajudar a simplificar sua vida e aumentar sua produtividade, permitindo a criação de notas e páginas complexas com recursos avançados de edição de texto.
 
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
 
