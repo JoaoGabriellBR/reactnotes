@@ -126,7 +126,7 @@ export default function User() {
         <DialogTitle>Excluir Nota</DialogTitle>
 
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText id="alert-dialog-description" style={{ fontWeight: 'bold' }}>
             Você tem certeza que deseja excluir esta nota?
           </DialogContentText>
         </DialogContent>
