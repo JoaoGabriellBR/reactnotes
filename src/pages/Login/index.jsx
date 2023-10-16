@@ -39,7 +39,7 @@ export default function Login() {
       openLink("/");
     } catch (e) {
       setLoading(false);
-      const errorMessage = "Não foi possível realizar o login."
+      const errorMessage = e?.response?.data?.error || "Não foi possível realizar o login."
       toast.error(errorMessage, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
