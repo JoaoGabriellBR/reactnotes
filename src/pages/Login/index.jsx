@@ -9,18 +9,24 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
-import { HiOutlineMail } from "react-icons/hi";
-import { BiLock } from "react-icons/bi";
 import ReactLoading from "react-loading";
+import { inputFields } from "utils/inputFields";
 
 export default function Login() {
   const navigate = useNavigate();
   const openLink = (link) => navigate(link);
 
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleChange = (e, field) => {
+    setFormData({ ...formData, [field]: e.target.value });
+  };
 
   const handleLogin = async () => {
     setLoading(true);
@@ -29,8 +35,8 @@ export default function Login() {
         method: "POST",
         url: "/login",
         data: {
-          email: email,
-          password: password,
+          email: formData.email,
+          password: formData.password,
         },
       });
       const { token } = response?.data;
@@ -39,7 +45,8 @@ export default function Login() {
       openLink("/");
     } catch (e) {
       setLoading(false);
-      const errorMessage = e?.response?.data?.error || "Não foi possível realizar o login."
+      const errorMessage =
+        e?.response?.data?.error || "Não foi possível realizar o login.";
       toast.error(errorMessage, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
@@ -65,57 +72,47 @@ export default function Login() {
               <Title marginBottom="35px" fontSize="2rem" color="#000">
                 Login
               </Title>
-              <TextField
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="E-mail"
-                className="input-form"
-                type="email"
-                variant="standard"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <IconButton>
-                        <HiOutlineMail />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Senha"
-                className="input-form"
-                type={showPassword ? "text" : "password"}
-                variant="standard"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <IconButton>
-                        <BiLock />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={() => setShowPassword(!showPassword)}
-                        onMouseDown={(e) => e.preventDefault()}
-                      >
-                        {showPassword ? (
-                          <MdOutlineVisibility size={21} />
-                        ) : (
-                          <MdOutlineVisibilityOff size={21} />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
+
+              {inputFields?.slice(1).map((input) => (
+                <TextField
+                  value={formData[input.id]}
+                  onChange={(e) => handleChange(e, input.id)}
+                  placeholder={input.placeholder}
+                  type={
+                    input.id === "password"
+                      ? showPassword
+                        ? "text"
+                        : "password"
+                      : input.type
+                  }
+                  className="input-form"
+                  variant="standard"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <IconButton>{input.icon}</IconButton>
+                      </InputAdornment>
+                    ),
+                    endAdornment: input.id === "password" && (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={() => setShowPassword(!showPassword)}
+                          onMouseDown={(e) => e.preventDefault()}
+                        >
+                          {showPassword ? (
+                            <MdOutlineVisibility size={21} />
+                          ) : (
+                            <MdOutlineVisibilityOff size={21} />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              ))}
 
               <Button
-                disabled={!email || !password}
+                disabled={!formData.email || !formData.password}
                 type="button"
                 onClick={handleLogin}
                 mobile="80%"
