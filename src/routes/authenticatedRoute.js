@@ -21,7 +21,6 @@ const AuthenticatedRoute = ({ component: Component, ...props }) => {
   }, [navigate]);
 
   if (loading) {
-    // Exibir um componente de carregamento enquanto verifica a autenticação
     return <div>Carregando...</div>;
   }
 

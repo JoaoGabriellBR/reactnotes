@@ -14,12 +14,48 @@ import ReactLoading from "react-loading";
 
 export default function Profile() {
   const [userData, setUserData] = useState([]);
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+
+  // const [currentPassword, setCurrentPassword] = useState("");
+  // const [newPassword, setNewPassword] = useState("");
+
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
+
+  const [showPassword, setShowPassword] = useState({
+    currentPassword: false,
+    newPassword: false,
+  });
+
   const [loadingUpdate, setLoadingUpdate] = useState(false);
   const [loadingUpdatePassword, setLoadingUpdatePassword] = useState(false);
+
+  const [formChangePassword, setFormChangePassword] = useState({
+    currentPassword: "",
+    newPassword: "",
+  });
+
+  const handleChangeShowPassword = (e, field) => {
+    setShowPassword({ ...showPassword, [field]: e.target.value })
+  };
+
+  const handleChangeFormPassword = (e, field) => {
+    setFormChangePassword({ ...formChangePassword, [field]: e.target.value });
+  };
+
+  const inputFields = [
+    {
+      id: "currentPassword",
+      placeholder: "Digite a sua senha atual",
+      label: "Senha atual",
+      type: showCurrentPassword ? "text" : "password",
+    },
+    {
+      id: "newPassword",
+      placeholder: "Digite a sua nova senha",
+      label: "Nova senha",
+      type: showNewPassword ? "text" : "password",
+    },
+  ];
 
   const loadUserData = async () => {
     const response = await api({
@@ -77,8 +113,8 @@ export default function Profile() {
           Authorization: Cookies.get("reactnotes_authtoken"),
         },
         data: {
-          oldPassword: currentPassword,
-          newPassword: newPassword,
+          oldPassword: formChangePassword.currentPassword,
+          newPassword: formChangePassword.newPassword,
         },
         json: true,
       });
@@ -161,59 +197,40 @@ export default function Profile() {
           </Title>
 
           <div className="alterar-senha">
-            <TextField
-              value={currentPassword}
-              onChange={(e) => setCurrentPassword(e.target.value)}
-              placeholder="Digite a sua senha atual"
-              className="input-form"
-              label="Senha atual"
-              type={showCurrentPassword ? "text" : "password"}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={() =>
-                        setShowCurrentPassword(!showCurrentPassword)
-                      }
-                      onMouseDown={(e) => e.preventDefault()}
-                    >
-                      {showCurrentPassword ? (
-                        <MdOutlineVisibility />
-                      ) : (
-                        <MdOutlineVisibilityOff />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
+            {inputFields?.map((input) => (
+              <TextField
+                value={formChangePassword[input.id]}
+                onChange={(e) => handleChangeFormPassword(e, input.id)}
+                placeholder={input.placeholder}
+                label={input.label}
+                type={input.type}
+                className="input-form"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() =>
+                          setShowCurrentPassword(!showCurrentPassword)
+                        }
+                        onMouseDown={(e) => e.preventDefault()}
+                      >
+                        {showCurrentPassword ? (
+                          <MdOutlineVisibility />
+                        ) : (
+                          <MdOutlineVisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            ))}
 
-            <TextField
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="Digite a sua nova senha"
-              className="input-form"
-              label="Nova senha"
-              type={showNewPassword ? "text" : "password"}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={() => setShowNewPassword(!showNewPassword)}
-                      onMouseDown={(e) => e.preventDefault()}
-                    >
-                      {showNewPassword ? (
-                        <MdOutlineVisibility />
-                      ) : (
-                        <MdOutlineVisibilityOff />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
             <Button
-              disabled={!currentPassword && !newPassword}
+              disabled={
+                !formChangePassword.currentPassword &&
+                !formChangePassword.newPassword
+              }
               type="button"
               onClick={handleChangePassword}
               width="50%"
