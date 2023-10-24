@@ -15,31 +15,25 @@ import ReactLoading from "react-loading";
 export default function Profile() {
   const [userData, setUserData] = useState([]);
 
-  // const [currentPassword, setCurrentPassword] = useState("");
-  // const [newPassword, setNewPassword] = useState("");
-
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
+  const [loadingUpdatePassword, setLoadingUpdatePassword] = useState(false);
 
   const [showPassword, setShowPassword] = useState({
     currentPassword: false,
     newPassword: false,
   });
 
-  const [loadingUpdate, setLoadingUpdate] = useState(false);
-  const [loadingUpdatePassword, setLoadingUpdatePassword] = useState(false);
-
-  const [formChangePassword, setFormChangePassword] = useState({
+  const [changePassword, setChangePassword] = useState({
     currentPassword: "",
     newPassword: "",
   });
 
-  const handleChangeShowPassword = (e, field) => {
-    setShowPassword({ ...showPassword, [field]: e.target.value })
+  const handleChangeShowPassword = (field) => {
+    setShowPassword({ ...showPassword, [field]: !showPassword[field] });
   };
 
   const handleChangeFormPassword = (e, field) => {
-    setFormChangePassword({ ...formChangePassword, [field]: e.target.value });
+    setChangePassword({ ...changePassword, [field]: e.target.value });
   };
 
   const inputFields = [
@@ -47,13 +41,13 @@ export default function Profile() {
       id: "currentPassword",
       placeholder: "Digite a sua senha atual",
       label: "Senha atual",
-      type: showCurrentPassword ? "text" : "password",
+      type: showPassword.currentPassword ? "text" : "password",
     },
     {
       id: "newPassword",
       placeholder: "Digite a sua nova senha",
       label: "Nova senha",
-      type: showNewPassword ? "text" : "password",
+      type: showPassword.newPassword ? "text" : "password",
     },
   ];
 
@@ -102,7 +96,7 @@ export default function Profile() {
     }
   };
 
-  const handleChangePassword = async () => {
+  const handleUpdatePassword = async () => {
     setLoadingUpdatePassword(true);
     try {
       await api({
@@ -113,8 +107,8 @@ export default function Profile() {
           Authorization: Cookies.get("reactnotes_authtoken"),
         },
         data: {
-          oldPassword: formChangePassword.currentPassword,
-          newPassword: formChangePassword.newPassword,
+          oldPassword: changePassword.currentPassword,
+          newPassword: changePassword.newPassword,
         },
         json: true,
       });
@@ -199,7 +193,7 @@ export default function Profile() {
           <div className="alterar-senha">
             {inputFields?.map((input) => (
               <TextField
-                value={formChangePassword[input.id]}
+                value={changePassword[input.id]}
                 onChange={(e) => handleChangeFormPassword(e, input.id)}
                 placeholder={input.placeholder}
                 label={input.label}
@@ -209,12 +203,10 @@ export default function Profile() {
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
-                        onClick={() =>
-                          setShowCurrentPassword(!showCurrentPassword)
-                        }
                         onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => handleChangeShowPassword(input?.id)}
                       >
-                        {showCurrentPassword ? (
+                        {showPassword[input?.id] === true ? (
                           <MdOutlineVisibility />
                         ) : (
                           <MdOutlineVisibilityOff />
@@ -228,11 +220,10 @@ export default function Profile() {
 
             <Button
               disabled={
-                !formChangePassword.currentPassword &&
-                !formChangePassword.newPassword
+                !changePassword.currentPassword && !changePassword.newPassword
               }
               type="button"
-              onClick={handleChangePassword}
+              onClick={handleUpdatePassword}
               width="50%"
             >
               {loadingUpdatePassword ? (
